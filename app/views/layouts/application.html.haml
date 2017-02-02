@@ -1,16 +1,20 @@
 !!! 5
-%html{ :lang => "en" }
+%html{ lang: "en" }
   %head
-    %meta{ :charset => "utf-8" }
+    %meta{ charset: "utf-8" }
 
-    %meta{ :name => "viewport", :content => "width=device-width, initial-scale=1.0" }
+    %meta{ name: "viewport", content: "width=device-width, initial-scale=1.0" }
 
-    %title= content_for?(:title) ? yield(:title) : "Untitled"
+    %title= content_for?(:title) ? yield(:title) : "LaunchVotes"
 
     = stylesheet_link_tag "application"
-    = javascript_include_tag "application", "data-turbolinks-track" => true
+    = javascript_include_tag "application", "data-turbolinks-track": true
     = csrf_meta_tag
 
   %body
-
+    - flash.each do |name, msg|
+      %div{ class: name + " callout", data: { closable: "" }}
+        = content_tag :span, msg
+        %button.close-button{ "aria-label": "Dismiss alert", data: { close: "" }, type: "button" }
+          %span{ "aria-hidden": true } &times;
     = yield
