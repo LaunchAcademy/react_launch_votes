@@ -1,24 +1,3 @@
-# README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+[ ![Codeship Status for LaunchAcademy/react_launch_votes](https://codeship.com/projects/e877c530-cbc8-0134-43ef-021bb1a52c15/status?branch=master)](https://codeship.com/projects/200022)
+![Code Climate](https://codeclimate.com/github/LaunchAcademy/react_launch_votes.png)
+![Coverage Status](https://coveralls.io/repos/LaunchACademy/react_launch_votes/badge.png)
