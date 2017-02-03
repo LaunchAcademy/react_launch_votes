@@ -7,18 +7,16 @@ class User < ApplicationRecord
 
   def update_from_github(auth_hash)
     assign_attributes(
-      image_url: auth_hash["extra"]["raw_info"]["avatar_url"],
+      image_url: auth_hash["info"]["image"],
       name: auth_hash["info"]["name"])
-    increment :sign_in_count
     self
   end
 
   def self.new_from_github(auth_hash)
     new(
       github_uid: auth_hash["uid"],
-      image_url: auth_hash["extra"]["raw_info"]["avatar_url"],
-      name: auth_hash["info"]["name"],
-      sign_in_count: 1)
+      image_url: auth_hash["info"]["image"],
+      name: auth_hash["info"]["name"])
   end
 
 end

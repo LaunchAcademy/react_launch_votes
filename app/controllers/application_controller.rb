@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
   end
 
   def sign_in(user)
+    user.increment! :sign_in_count
     session[:user_id] = user.id
   end
 
