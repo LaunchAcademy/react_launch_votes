@@ -7,6 +7,7 @@ require "rspec/rails"
 require "capybara/rspec"
 require "capybara/email/rspec"
 require "factory_girl"
+require "omniauth-github"
 require "shoulda-matchers"
 require "valid_attribute"
 
@@ -22,8 +23,13 @@ Shoulda::Matchers.configure do |config|
 end
 
 RSpec.configure do |config|
+  config.before(:each) do
+    OmniAuth.config.mock_auth[:github] = nil
+  end
+  config.include AuthenticationHelpers
   config.include FactoryGirl::Syntax::Methods
+  config.filter_rails_from_backtrace!
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
   config.use_transactional_fixtures = true
-  config.filter_rails_from_backtrace!
+  OmniAuth.config.test_mode = true
 end
