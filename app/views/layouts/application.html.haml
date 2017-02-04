@@ -13,22 +13,35 @@
 
   %body
     .top-bar
-      .top-bar-title
-        %span{"data-responsive-toggle": "responsive-menu", "data-hide-for": "medium"}
-          %button.menu-icon.dark{type: "button", "data-toggle": ""}
-        %strong.header-font
-          &nbsp;
-          =link_to "LaunchVotes", root_path
-      .top-bar-right
-        %ul.vertical.medium-horizontal.menu
-          -if user_signed_in?
-            %li.white
-              = link_to "Sign Out", sign_out_path, method: :delete
-          -else
-            %li.white
-              = link_to auth_path(:github) do
-                %i.fa.fa-github
-                Sign in with GitHub
+      .row
+        .small-12.columns
+          .top-bar-title
+            %strong
+              = link_to root_path do
+                = image_tag("logo.png", class: "logo")
+                &nbsp;LaunchVotes
+          .top-bar-right
+            -if user_signed_in?
+              %ul.dropdown.menu{"data-dropdown-menu": ""}
+                %li.is-dropdown-submenu-parent
+                  = link_to nil do
+                    = image_tag(current_user.image_url, class: "image-topbar")
+                    = current_user.name
+                  %ul.menu.vertical
+                    %li
+                      = link_to user_path(current_user), class: "button" do
+                        %i.fa.fa-user-circle
+                        My Profile
+                    %li
+                      = link_to sign_out_path, class: "button", method: :delete do
+                        %i.fa.fa-sign-out
+                        Sign Out
+            -else
+              %ul.vertical.medium-horizontal.menu
+                %li
+                  = link_to auth_path(:github) do
+                    %i.fa.fa-github
+                    Sign in with GitHub
     - flash.each do |name, msg|
       %div{ class: name + " callout", data: { closable: "" }}
         = content_tag :span, msg

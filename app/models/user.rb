@@ -5,6 +5,10 @@ class User < ApplicationRecord
   validates_presence_of :image_url, :name
   validates_uniqueness_of :handle, :github_id
 
+  def to_param
+    handle
+  end
+
   def update_from_github(auth_hash)
     assign_attributes(
       handle: auth_hash["info"]["nickname"],

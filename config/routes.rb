@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   root "pages#index"
 
   resources :auth, only: :show
+  resources :users, only: :show
 end
