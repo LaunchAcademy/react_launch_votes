@@ -12,6 +12,23 @@
     = csrf_meta_tag
 
   %body
+    .top-bar
+      .top-bar-title
+        %span{"data-responsive-toggle": "responsive-menu", "data-hide-for": "medium"}
+          %button.menu-icon.dark{type: "button", "data-toggle": ""}
+        %strong.header-font
+          &nbsp;
+          =link_to "LaunchVotes", root_path
+      .top-bar-right
+        %ul.vertical.medium-horizontal.menu
+          -if user_signed_in?
+            %li.white
+              = link_to "Sign Out", sign_out_path, method: :delete
+          -else
+            %li.white
+              = link_to auth_path(:github) do
+                %i.fa.fa-github
+                Sign in with GitHub
     - flash.each do |name, msg|
       %div{ class: name + " callout", data: { closable: "" }}
         = content_tag :span, msg
