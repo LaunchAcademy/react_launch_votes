@@ -18,4 +18,12 @@ RSpec.feature "user signs in" do
   it "does not create a new user" do
     expect{sign_in(user)}.to_not change{User.count}
   end
+
+  it "does not start a signed-in session without auth from GitHub" do
+    visit auth_path(:github)
+
+    expect(page).to have_content "There was a problem signing in."
+    expect(page).to_not have_content "Sign Out"
+    expect(page).to_not have_content "Signed in as"
+  end
 end
