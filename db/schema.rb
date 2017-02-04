@@ -17,13 +17,14 @@ ActiveRecord::Schema.define(version: 20170202201259) do
 
   create_table "users", force: :cascade do |t|
     t.string   "email"
-    t.string   "github_uid"
+    t.string   "github_id"
+    t.string   "handle"
     t.string   "image_url"
     t.string   "name"
     t.integer  "sign_in_count", default: 0
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
-    t.index ["github_uid"], name: "index_users_on_github_uid", unique: true, using: :btree
+    t.index ["github_id"], name: "index_users_on_github_id", unique: true, using: :btree
     t.index ["name"], name: "index_users_on_name", unique: true, using: :btree
   end
 

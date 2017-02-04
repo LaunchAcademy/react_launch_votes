@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
 
   def create
     auth_hash = request.env["omniauth.auth"].slice("uid", "info")
-    existing_user = User.find_by(github_uid: auth_hash["uid"])
+    existing_user = User.find_by(github_id: auth_hash["uid"])
     if existing_user.nil?
       user = User.new_from_github(auth_hash)
     else
@@ -16,6 +16,12 @@ class SessionsController < ApplicationController
       flash[:alert] = "There was a problem signing in."
     end
     redirect_to root_path
+  end
+
+  def destroy
+    sign_out
+    flash[:success] = "Signed out."
+    redirect_to root_url
   end
 
 end

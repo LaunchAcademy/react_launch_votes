@@ -2,9 +2,10 @@ require "factory_girl"
 
 FactoryGirl.define do
   factory :user do
-    sequence(:email) { |n| "user#{n}@example.com" }
-    sequence(:github_uid) { |n| "ck#{n}" }
-    sequence(:name) { |n| "Carmilla #{n} Karnstein" }
-    sequence(:image_url) { |n| "https://avatars.example.com/u/#{n}" }
+    email "carmilla@example.com"
+    sequence(:github_id) { |n| "ck#{n}" }
+    sequence(:handle) { |n| "HeyCarmilla#{n}" }
+    image_url "https://avatars.example.com"
+    name "Carmilla Karnstein"
   end
 end
