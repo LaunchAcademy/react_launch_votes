@@ -11,7 +11,3 @@ Rails.application.config.middleware.use OmniAuth::Builder do
       site: launch_pass_sites[Rails.env.to_sym]
     }
 end
-
-OmniAuth.config.on_failure = Proc.new { |env|
-  OmniAuth::FailureEndpoint.new(env).redirect_to_failure
-}

@@ -12,6 +12,19 @@ module AuthenticationHelpers
     visit auth_path(:github)
   end
 
+  def sign_in_failure
+    OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new({
+      provider: "github",
+      uid: nil,
+      info: {
+        nickname: nil,
+        image: nil,
+        name: nil
+      }
+    })
+    visit auth_path(:github)
+  end
+
   def sign_up_user(uid = "4747")
     OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new({
       provider: "github",

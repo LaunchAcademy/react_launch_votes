@@ -20,7 +20,7 @@ RSpec.feature "user signs in" do
   end
 
   it "does not start a signed-in session without auth from GitHub" do
-    visit auth_path(:github)
+    sign_in_failure
 
     expect(page).to have_content "There was a problem signing in."
     expect(page).to_not have_content "Sign Out"

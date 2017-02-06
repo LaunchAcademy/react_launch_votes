@@ -1,8 +1,8 @@
 class SessionsController < ApplicationController
+  before_action :prevent_duplicate_sign_in, only: :new
 
-  def create
-    binding.pry
-    auth_hash = request.env["omniauth.auth"].slice("uid", "info")
+  def new
+    auth_hash = session[:auth]
     existing_user = User.find_by(github_id: auth_hash["uid"])
     if existing_user.nil?
       user = User.new_from_github(auth_hash)
@@ -16,6 +16,7 @@ class SessionsController < ApplicationController
       sign_out
       flash[:alert] = "There was a problem signing in."
     end
+    session.delete(:auth)
     redirect_to root_path
   end
 
@@ -23,10 +24,6 @@ class SessionsController < ApplicationController
     sign_out
     flash[:success] = "Signed out."
     redirect_to root_url
-  end
-
-  def failure
-    binding.pry
   end
 
 end
