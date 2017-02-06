@@ -1,6 +1,7 @@
 class SessionsController < ApplicationController
 
   def create
+    binding.pry
     auth_hash = request.env["omniauth.auth"].slice("uid", "info")
     existing_user = User.find_by(github_id: auth_hash["uid"])
     if existing_user.nil?
@@ -22,6 +23,10 @@ class SessionsController < ApplicationController
     sign_out
     flash[:success] = "Signed out."
     redirect_to root_url
+  end
+
+  def failure
+    binding.pry
   end
 
 end

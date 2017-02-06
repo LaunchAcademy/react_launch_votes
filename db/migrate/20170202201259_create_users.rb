@@ -5,6 +5,7 @@ class CreateUsers < ActiveRecord::Migration[5.0]
       t.string :github_id
       t.string :handle
       t.string :image_url
+      t.string :launch_pass_id
       t.string :name
       t.integer :sign_in_count, default: 0
 

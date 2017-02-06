@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/launchacademy/omniauth-launch-pass.git
+  revision: e231c20d7db9a39b1dd8a40165ddf07af622aca4
+  specs:
+    omniauth-launch-pass (0.0.1)
+      omniauth-oauth2 (~> 1.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -275,6 +282,7 @@ DEPENDENCIES
   launchy
   listen (~> 3.0.5)
   omniauth-github
+  omniauth-launch-pass!
   pg (~> 0.18)
   pry-rails
   puma (~> 3.0)

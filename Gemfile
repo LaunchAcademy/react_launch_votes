@@ -12,6 +12,8 @@ gem "haml"
 gem "jbuilder", "~> 2.5"
 gem "jquery-rails"
 gem "omniauth-github"
+gem "omniauth-launch-pass",
+  github: "launchacademy/omniauth-launch-pass"
 gem "pg", "~> 0.18"
 gem "puma", "~> 3.0"
 gem "rails", "~> 5.0.1"
