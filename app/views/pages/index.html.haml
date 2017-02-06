@@ -1,1 +1,45 @@
-#app
+-if user_signed_in?
+  -if current_user.launch_pass_id.nil?
+    .row
+      .small-11.medium-7.small-centered.columns
+        =link_to auth_path(:launch_pass), class: "button expanded large" do
+          %i.fa.fa-rocket
+          Link Your Account To LaunchPass
+  -else
+    #app
+-else
+  .row
+    .small-12.columns
+      %h1.text-center Welcome to LaunchVotes 2.0
+      %h2.text-center For Weekly Nominations
+      .row
+        .small-11.medium-7.small-centered.columns
+          =link_to auth_path(:github), class: "button expanded large" do
+            %i.fa.fa-github
+            Sign In with GitHub
+      .callout
+        %h3.text-center About
+        %p
+          LaunchVotes started as an innovative idea to promote the social
+          and lighthearted environment here at Launch Academy. We hope to creat
+          a platform for fellow Launchers to nominate each other for all the
+          strange and funny things that occur during the week.
+      .callout.secondary
+        %h3.text-center Allow us to introduce ourselves&hellip;
+        .row
+          .small-12.medium-6.columns
+            .text-center
+              = image_tag "Omid-Bachari.jpg", class: "nomination"
+              %h4 Omid Bachari
+              %h5
+                = link_to "https://github.com/omidbachari" do
+                  %i.fa.fa-github
+                  GitHub
+          .small-12.medium-6.columns
+            .text-center
+              = image_tag "Alex-Morgan.jpg", class: "nomination"
+              %h4 Alex Morgan
+              %h5
+                = link_to "https://github.com/AlexMorgan" do
+                  %i.fa.fa-github
+                  GitHub
