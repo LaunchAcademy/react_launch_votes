@@ -18,6 +18,7 @@
 
 .env
 /app/assets/javascripts/bundle.js
+/db/seeds.rb
 /coverage
 /node_modules
 /react/coverage
