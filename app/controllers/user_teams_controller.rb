@@ -3,8 +3,7 @@ class UserTeamsController < ApplicationController
 
   def edit
     auth_hash = session[:auth]
-    user = current_user.update_from_launch_pass(auth_hash)
-    if user.save
+    if LaunchPassDigester.new(auth_hash, current_user).digest
       flash[:success] = "LaunchPass account linked successfully."
     else
       flash[:alert] = "There was a problem linking your LaunchPass account."

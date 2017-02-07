@@ -52,16 +52,16 @@ $global-lineheight: 1.5;
 $foundation-palette: (
   primary: #eb227b,
   secondary: #34495e,
-  success: #3adb76,
-  warning: #ffae00,
-  alert: #cc4b37,
+  success: #84ce15,
+  warning: #37becc,
+  alert: #d3080c,
 );
-$light-gray: #e6e6e6;
-$medium-gray: #cacaca;
-$dark-gray: #8a8a8a;
-$black: #0a0a0a;
-$white: #fefefe;
-$body-background: #eeeeee;
+$light-gray: #eeeeee;
+$medium-gray: #cccccc;
+$dark-gray: #777777;
+$black: #1c2224;
+$white: #f8f8f9;
+$body-background: $light-gray;
 $body-font-color: $black;
 $body-font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
 $body-antialiased: true;
