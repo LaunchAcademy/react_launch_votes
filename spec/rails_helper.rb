@@ -25,6 +25,7 @@ end
 RSpec.configure do |config|
   config.before(:each) do
     OmniAuth.config.mock_auth[:github] = nil
+    OmniAuth.config.mock_auth[:launch_pass] = nil
   end
   config.include AuthenticationHelpers
   config.include FactoryGirl::Syntax::Methods
