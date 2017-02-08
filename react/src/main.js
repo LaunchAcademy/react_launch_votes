@@ -8,8 +8,11 @@ import { Router, Route, browserHistory } from 'react-router'
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 import App from './components/App'
 
+import rootReducer from './reducers/rootReducer'
+
 const store = createStore(
   combineReducers({
+    rootReducer,
     routing: routerReducer
   })
 )
