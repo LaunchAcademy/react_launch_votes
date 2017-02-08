@@ -1,12 +1,9 @@
 -if user_signed_in?
-  -if current_user.launch_pass_id.nil?
-    .row
-      .small-11.medium-7.small-centered.columns
-        =link_to auth_path(:launch_pass), class: "button expanded large" do
-          %i.fa.fa-rocket
-          Link Your Account To LaunchPass
-  -else
-    #app
+  .row
+    .small-11.medium-7.small-centered.columns
+      =link_to auth_path(:launch_pass), class: "button expanded large" do
+        %i.fa.fa-rocket
+        Link Your Account To LaunchPass
 -else
   .row
     .small-12.columns

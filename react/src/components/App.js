@@ -7,7 +7,12 @@ class App extends Component {
 
   render() {
     return(
-      <h1>Hello from the <code>App.js</code> component.</h1>
+      <div className="row">
+        <div className="small-12 columns">
+          <h1>Hello from the <code>App.js</code> component.</h1>
+          {this.props.children}
+        </div>
+      </div>
     )
   }
 }
