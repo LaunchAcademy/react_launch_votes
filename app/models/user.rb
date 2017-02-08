@@ -6,8 +6,13 @@ class User < ApplicationRecord
   has_many :teams, through: :memberships
 
   validates_format_of :email, with: EMAIL_REGEXP, allow_blank: true
-  validates_presence_of :image_url, :name
+  validates_format_of :image_url, with: URI::regexp(["http", "https"])
+  validates_presence_of :name
   validates_uniqueness_of :handle, :github_id
+
+  def admin?
+    teams.where(name: "Admins").any?
+  end
 
   def to_param
     handle

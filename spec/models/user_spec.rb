@@ -17,7 +17,9 @@ describe User, type: :model do
   it { should have_valid(:email).when("something@example.com", "another@something.com") }
   it { should_not have_valid(:email).when("bad", ".com", "bad@com", "bad.com") }
 
-  it { should validate_presence_of(:image_url) }
+  it { should have_valid(:image_url).when("https://avatars.githubusercontent.com/u/1234567?v=1", "http://avatars.githubusercontent.com/u/1234567?v=2") }
+  it { should_not have_valid(:image_url).when("avatars.githubusercontent.com", "", nil) }
+
   it { should validate_presence_of(:name) }
   it { should validate_uniqueness_of(:github_id) }
   it { should validate_uniqueness_of(:handle) }
@@ -33,6 +35,19 @@ describe User, type: :model do
       expect(user.image_url).to eq("http://imgur.com")
       expect(user.name).to eq("Laura Hollis")
       expect(user.new_record?).to be(true)
+    end
+  end
+
+  describe "#admin?" do
+    let(:user) { create(:user) }
+    let(:admin_user) { create(:admin_user) }
+
+    it "returns true for admin users" do
+      expect(admin_user.admin?).to be(true)
+    end
+
+    it "returns false for non-admin users" do
+      expect(user.admin?).to be(false)
     end
   end
 

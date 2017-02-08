@@ -11,4 +11,31 @@ describe Nomination, type: :model do
   it { should validate_presence_of(:nominator) }
   it { should validate_presence_of(:nominee) }
   it { should validate_presence_of(:team) }
+
+  describe "validates nominator/nominee belong to team (or are admins)" do
+    let(:admin) { create(:admin_user) }
+    let(:non_team_user) { create(:user) }
+    let(:nomination) { create(:nomination) }
+
+    it "accepts admin nominators" do
+      nomination.nominator = admin
+      expect(nomination.valid?).to be(true)
+    end
+
+    it "rejects non-team nominators" do
+      nomination.nominator = non_team_user
+      expect(nomination.valid?).to be(false)
+    end
+
+    it "accepts admin nominees" do
+      nomination.nominee = admin
+      expect(nomination.valid?).to be(true)
+    end
+
+
+    it "rejects non-team nominees" do
+      nomination.nominee = non_team_user
+      expect(nomination.valid?).to be(false)
+    end
+  end
 end

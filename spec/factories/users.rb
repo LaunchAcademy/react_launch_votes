@@ -7,5 +7,14 @@ FactoryGirl.define do
     sequence(:handle) { |n| "HeyCarmilla#{n}" }
     image_url "https://avatars.example.com"
     name "Carmilla Karnstein"
+
+    trait :admin do
+      after(:build) do |user|
+        admin_team = create(:team, name: "Admins")
+        create(:membership, team: admin_team, user: user)
+      end
+    end
+
+    factory :admin_user, traits: [:admin]
   end
 end
