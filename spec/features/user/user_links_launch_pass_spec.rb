@@ -37,5 +37,33 @@ RSpec.feature "user links LaunchPass account" do
       expect(user.teams.first.name).to eq("Root")
       expect(user.teams.second.name).to eq("Samaritan")
     end
+
+    it "updates attributes for teams that already exist" do
+      sign_in(user)
+      link_launch_pass("9997", "john_reese@teammachine.org", [first_team, second_team])
+      first_team.update(name: "Jack")
+      second_team.update(name: "Sally")
+      link_launch_pass("9997", "the_pumpkin_king@thisishalloween.com", [first_team, second_team])
+
+      user.reload
+      expect(page).to have_content "LaunchPass account linked"
+      expect(user.teams.first.name).to eq("Jack")
+      expect(user.teams.second.name).to eq("Sally")
+      expect(user.email).to eq("the_pumpkin_king@thisishalloween.com")
+    end
+  end
+
+  describe "unsuccessfully" do
+    it "fails if the user is not signed in" do
+      link_launch_pass
+
+      expect(page).to have_content "You must be signed in to link your LaunchPass account"
+    end
+
+    it "requires the user to sign in" do
+      visit edit_user_team_path(user)
+
+      expect(page).to have_content "You need to sign in before continuing"
+    end
   end
 end
