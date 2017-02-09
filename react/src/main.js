@@ -6,6 +6,8 @@ import { createStore, combineReducers } from 'redux'
 import { Provider } from 'react-redux'
 import { Router, Route, browserHistory } from 'react-router'
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
+import { reducer as formReducer } from 'redux-form'
+
 import App from './components/App'
 import NominationsContainer from './containers/NominationsContainer'
 
@@ -14,6 +16,7 @@ import rootReducer from './reducers/rootReducer'
 const store = createStore(
   combineReducers({
     rootReducer,
+    form: formReducer,
     routing: routerReducer
   })
 )
