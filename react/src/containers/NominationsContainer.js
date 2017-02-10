@@ -4,6 +4,20 @@ import NewNominationFormContainer from './NewNominationFormContainer'
 class NominationsContainer extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      team: {
+        users: []
+      }
+    }
+  }
+
+  componentDidMount() {
+    let teamId = this.props.params.team_id;
+    fetch(`/api/v1/teams/${teamId}`)
+      .then((response) => response.json())
+      .then((responseData) => {
+        this.setState({team: responseData})
+      })
   }
 
   render() {

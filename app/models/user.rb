@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   EMAIL_REGEXP = /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/
 
+  default_scope { order(:name) }
+
   has_many :nominations, foreign_key: :nominee_id
   has_many :memberships
   has_many :teams, through: :memberships
