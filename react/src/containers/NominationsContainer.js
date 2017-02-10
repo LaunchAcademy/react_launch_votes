@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { getTeam } from '../actions/getTeam';
-import NewNominationFormContainer from './NewNominationFormContainer'
+import NewNominationForm from '../components/NewNominationForm'
 
 class NominationsContainer extends Component {
   constructor(props) {
@@ -10,7 +10,7 @@ class NominationsContainer extends Component {
   }
 
   componentWillMount() {
-    let teamId = this.props.params.team_id;
+    let teamId = this.props.params.teamId;
     this.props.getTeam(teamId)
   }
 
@@ -20,7 +20,7 @@ class NominationsContainer extends Component {
         <h2>Hello from the <code>NominationsContainer.js</code> container.</h2>
         <div className="row">
           <div className="small-11 medium-7 small-centered columns">
-            <NewNominationFormContainer />
+            <NewNominationForm team={this.props.team} />
           </div>
         </div>
       </div>

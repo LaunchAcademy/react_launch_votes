@@ -32,7 +32,7 @@ $(function() {
     <Provider store={store}>
       <Router history={history}>
         <Route path="/" component={App}>
-          <Route path="teams/:team_id/nominations" component={NominationsContainer}/>
+          <Route path="teams/:teamId/nominations" component={NominationsContainer}/>
         </Route>
       </Router>
     </Provider>,
