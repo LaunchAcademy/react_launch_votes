@@ -1,23 +1,17 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+import { getTeam } from '../actions/getTeam';
 import NewNominationFormContainer from './NewNominationFormContainer'
 
 class NominationsContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      team: {
-        users: []
-      }
-    }
   }
 
-  componentDidMount() {
+  componentWillMount() {
     let teamId = this.props.params.team_id;
-    fetch(`/api/v1/teams/${teamId}`)
-      .then((response) => response.json())
-      .then((responseData) => {
-        this.setState({team: responseData})
-      })
+    this.props.getTeam(teamId)
   }
 
   render() {
@@ -32,6 +26,18 @@ class NominationsContainer extends Component {
       </div>
     )
   }
-}
+};
 
-export default NominationsContainer;
+let mapStateToProps = state => {
+  return {
+    team: state.team
+  }
+};
+
+let mapDispatchToProps = dispatch => {
+  return {
+    getTeam: (teamId) => dispatch(getTeam(teamId))
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(NominationsContainer);
