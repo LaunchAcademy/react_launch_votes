@@ -1,10 +1,7 @@
 import React from 'react';
-import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form';
 
-let NewNominationForm = props => {
-  const { handleSubmit, pristine, submitting, team } = props
-
+let NewNominationForm = ({ handleSubmit, pristine, submitting, team }) => {
   const options = team.team.users.map(user => {
     return(<option key={user.id} value={user.id}>{user.name} ({user.handle})</option>)
   })
@@ -13,11 +10,10 @@ let NewNominationForm = props => {
     <div className="callout primary">
       <h3 className="text-center">Nominate A Fellow Launcher:</h3>
       <form onSubmit={handleSubmit}>
-        <fieldset>
-          <Field name="nominee_id" component="select">
-            {options}
-          </Field>
-        </fieldset>
+        <Field name="nominee_id" component="select" type="select">
+          <option></option>
+          {options}
+        </Field>
 
         <div className="text-center">
           <button className="hollow button secondary" type="submit">
@@ -32,11 +28,5 @@ let NewNominationForm = props => {
 NewNominationForm = reduxForm({
   form: 'newNomination'
 })(NewNominationForm)
-
-NewNominationForm = connect(
-  state => ({
-    initialValues: state,
-  })
-)(NewNominationForm)
 
 export default NewNominationForm;

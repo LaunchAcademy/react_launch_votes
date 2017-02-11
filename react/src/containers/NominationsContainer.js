@@ -14,13 +14,17 @@ class NominationsContainer extends Component {
     this.props.getTeam(teamId)
   }
 
+  postNomination(fields, dispatch) {
+    console.log(fields);
+  }
+
   render() {
     return(
       <div>
         <h2>Hello from the <code>NominationsContainer.js</code> container.</h2>
         <div className="row">
           <div className="small-11 medium-7 small-centered columns">
-            <NewNominationForm team={this.props.team} />
+            <NewNominationForm team={this.props.team} onSubmit={this.postNomination} />
           </div>
         </div>
       </div>
