@@ -1,8 +1,8 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 
-let NewNominationForm = ({ handleSubmit, pristine, submitting, team }) => {
-  const options = team.team.users.map(user => {
+let NewNominationForm = ({ handleSubmit, pristine, submitting, team, teamId }) => {
+  const options = team.users.map(user => {
     return(<option key={user.id} value={user.id}>{user.name} ({user.handle})</option>)
   })
 
@@ -14,9 +14,9 @@ let NewNominationForm = ({ handleSubmit, pristine, submitting, team }) => {
           <option></option>
           {options}
         </Field>
-
+        <Field name="body" component="input" type="text" placeholder="Most help requests" />
         <div className="text-center">
-          <button className="hollow button secondary" type="submit">
+          <button className="button secondary" disabled={pristine || submitting} type="submit">
             Submit
           </button>
         </div>
