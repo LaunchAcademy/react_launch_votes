@@ -8,10 +8,9 @@ let postNominationRequest = () => {
   };
 };
 
-let postNominationRequestSuccess = data => {
+let postNominationRequestSuccess = () => {
   return {
-    type: POST_NOMINATION_REQUEST_SUCCESS,
-    nomination: data
+    type: POST_NOMINATION_REQUEST_SUCCESS
   };
 };
 
@@ -34,11 +33,25 @@ let postNomination = (values) => {
     })
     .then(response => {
       let { ok, status, statusText } = response;
-      debugger
-      dispatch(postNominationRequestSuccess(response.json()))
+      if (status == 500) {
+        throw('Server Error.')
+      } else {
+        return response.json();
+      }
     })
-    .catch(error => {
-      dispatch(postNominationRequestFailure());
+    .then(data => {
+      if (typeof data.errors === "undefined") {
+        return { nomination: data };
+      } else {
+        throw(data.errors);
+      }
+    })
+    .then(nomination => {
+      dispatch(postNominationRequestSuccess())
+    })
+    .catch(errors => {
+      dispatch(postNominationRequestFailure())
+      throw new SubmissionError({'error': errors});
     })
   }
 }

@@ -8,12 +8,12 @@ class Api::V1::NominationsController < Api::ApiController
     if nomination.save
       render json: nomination
     else
-      render json: { error: nomination.errors.full_messages }, status: 422
+      render json: { errors: nomination.errors.full_messages }, status: 422
     end
   end
 
   def index
-    render json: Team.find(params[:team_id]).nominations.as_json
+    render json: Team.find(params[:team_id]).nominations
   end
 
   private
