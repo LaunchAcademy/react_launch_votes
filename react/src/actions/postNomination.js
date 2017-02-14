@@ -22,10 +22,24 @@ let postNominationRequestFailure = () => {
 };
 
 let postNomination = (values) => {
+  let payload = JSON.stringify(values)
   return (dispatch, getState) => {
+    dispatch(postNominationRequest());
     let teamId = getState().team.team.id
-    dispatch(postNominationRequest())
-    debugger
+    return fetch(`/api/v1/teams/${teamId}/nominations.json`, {
+      credentials: 'same-origin',
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: payload
+    })
+    .then(response => {
+      let { ok, status, statusText } = response;
+      debugger
+      dispatch(postNominationRequestSuccess(response.json()))
+    })
+    .catch(error => {
+      dispatch(postNominationRequestFailure());
+    })
   }
 }
 
