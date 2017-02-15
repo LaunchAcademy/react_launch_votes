@@ -32,7 +32,7 @@ let postNomination = (values) => {
       body: payload
     })
     .then(response => {
-      let { ok, status, statusText } = response;
+      let { status } = response;
       if (status == 500) {
         throw('Server Error.')
       } else {
@@ -51,7 +51,6 @@ let postNomination = (values) => {
     })
     .catch(errors => {
       dispatch(postNominationRequestFailure())
-      throw new SubmissionError({'error': errors});
     })
   }
 }

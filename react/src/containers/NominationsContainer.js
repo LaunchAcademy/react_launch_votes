@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 
 import { getTeam } from '../actions/getTeam';
 import { postNomination } from '../actions/postNomination';
-import NewNominationForm from '../components/NewNominationForm'
+import NewNominationForm from '../components/NewNominationForm';
+import Nomination from '../components/Nomination';
 
 class NominationsContainer extends Component {
   constructor(props) {
@@ -21,6 +22,12 @@ class NominationsContainer extends Component {
   }
 
   render() {
+    let nominations;
+    if (this.props.teamData.team.nominations) {
+      nominations = this.props.teamData.team.nominations.map(nomination => {
+        return(<Nomination key={nomination.id} nomination={nomination} />)
+      })
+    }
     return(
       <div>
         <h2>Hello from the <code>NominationsContainer.js</code> container.</h2>
@@ -28,6 +35,9 @@ class NominationsContainer extends Component {
           <div className="small-11 medium-7 small-centered columns">
             <NewNominationForm team={this.props.teamData.team} onSubmit={this.postNomination} />
           </div>
+        </div>
+        <div className="row">
+          {nominations}
         </div>
       </div>
     )
