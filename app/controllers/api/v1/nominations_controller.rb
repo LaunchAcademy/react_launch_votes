@@ -12,10 +12,6 @@ class Api::V1::NominationsController < Api::ApiController
     end
   end
 
-  def index
-    render json: Team.find(params[:team_id]).nominations
-  end
-
   private
 
   def create_params

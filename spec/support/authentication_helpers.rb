@@ -1,5 +1,5 @@
 module AuthenticationHelpers
-  def link_launch_pass(uid = "9999", email = "makewayforlaf@silasuniversity.edu", teams = [])
+  def link_launch_pass(uid = "9999", email = "makewayforlaf@silasuniversity.edu", teams = [FactoryGirl.create(:team)])
     serialized_teams = teams.map { |t| { "id" => t.launch_pass_id, "name" => t.name } }
     OmniAuth.config.mock_auth[:launch_pass] = OmniAuth::AuthHash.new({
       provider: "launch_pass",
