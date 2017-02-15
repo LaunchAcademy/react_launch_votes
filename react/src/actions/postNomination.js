@@ -1,6 +1,9 @@
+import { reset } from 'redux-form';
+
 const POST_NOMINATION_REQUEST = "POST_NOMINATION_REQUEST";
 const POST_NOMINATION_REQUEST_SUCCESS = "POST_NOMINATION_REQUEST_SUCCESS";
 const POST_NOMINATION_REQUEST_FAILURE = "POST_NOMINATION_REQUEST_FAILURE";
+const ADD_NOMINATION_TO_PAGE = "ADD_NOMINATION_TO_PAGE";
 
 let postNominationRequest = () => {
   return {
@@ -48,6 +51,8 @@ let postNomination = (values) => {
     })
     .then(nomination => {
       dispatch(postNominationRequestSuccess())
+      dispatch(addNominationToPage(nomination))
+      dispatch(reset('newNomination'))
     })
     .catch(errors => {
       dispatch(postNominationRequestFailure())
@@ -55,15 +60,24 @@ let postNomination = (values) => {
   }
 }
 
+let addNominationToPage = (nomination) => {
+  return {
+    type: ADD_NOMINATION_TO_PAGE,
+    nomination
+  }
+}
+
 export {
   POST_NOMINATION_REQUEST,
   POST_NOMINATION_REQUEST_SUCCESS,
-  POST_NOMINATION_REQUEST_FAILURE
+  POST_NOMINATION_REQUEST_FAILURE,
+  ADD_NOMINATION_TO_PAGE
 }
 
 export {
   postNomination,
   postNominationRequest,
   postNominationRequestSuccess,
-  postNominationRequestFailure
+  postNominationRequestFailure,
+  addNominationToPage
 }

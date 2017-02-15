@@ -13,9 +13,11 @@ import App from './components/App'
 import NominationsContainer from './containers/NominationsContainer'
 
 import team from './reducers/getTeam'
+import nomination from './reducers/postNomination'
 
 const store = createStore(
   combineReducers({
+    nomination,
     team,
     form: formReducer,
     routing: routerReducer

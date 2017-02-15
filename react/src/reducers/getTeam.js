@@ -4,10 +4,18 @@ import {
   GET_TEAM_REQUEST_FAILURE
 } from '../actions/getTeam';
 
+import {
+  ADD_NOMINATION_TO_PAGE
+} from '../actions/postNomination';
+
 let initialState = {
   team: {
+    id: null,
+    name: '',
+    nominations: [],
     users: []
-  }
+  },
+  isFetchingTeam: false
 }
 
 const team = (state = initialState, action) => {
@@ -24,6 +32,16 @@ const team = (state = initialState, action) => {
     case GET_TEAM_REQUEST_FAILURE:
       return Object.assign({}, state, {
         isFetchingTeam: false
+      });
+    case ADD_NOMINATION_TO_PAGE:
+      let newNominations = [action.nomination.nomination].concat(state.team.nominations);
+      return Object.assign({}, state, {
+        team: {
+          id: state.team.id,
+          name: state.team.name,
+          nominations: newNominations,
+          users: state.team.users
+        }
       });
     default:
       return state;
