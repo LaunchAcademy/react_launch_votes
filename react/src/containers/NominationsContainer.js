@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { getCurrentUser } from '../actions/getCurrentUser';
 import { getTeam } from '../actions/getTeam';
 import { postNomination } from '../actions/postNomination';
 import NewNominationForm from '../components/NewNominationForm';
@@ -11,10 +12,10 @@ class NominationsContainer extends Component {
     super(props);
   }
 
-
   componentWillMount() {
+    this.props.getCurrentUser();
     let teamId = this.props.params.teamId;
-    this.props.getTeam(teamId)
+    this.props.getTeam(teamId);
   }
 
   postNomination(fields, dispatch) {
@@ -23,9 +24,12 @@ class NominationsContainer extends Component {
 
   render() {
     let nominations;
-    if (this.props.teamData.team.nominations) {
+    let currentUser = this.props.currentUser.currentUser
+    if (this.props.currentUser && this.props.teamData.team) {
       nominations = this.props.teamData.team.nominations.map(nomination => {
-        return(<Nomination key={nomination.id} nomination={nomination} />)
+        if (nomination.nominee_id != currentUser.id) {
+          return(<Nomination key={nomination.id} nomination={nomination} />)
+        }
       })
     }
     return(
@@ -33,7 +37,7 @@ class NominationsContainer extends Component {
         <h2>Hello from the <code>NominationsContainer.js</code> container.</h2>
         <div className="row">
           <div className="small-11 medium-7 small-centered columns">
-            <NewNominationForm team={this.props.teamData.team} onSubmit={this.postNomination} />
+            <NewNominationForm currentUser={this.props.currentUser.currentUser} team={this.props.teamData.team} onSubmit={this.postNomination} />
           </div>
         </div>
         <div className="row">
@@ -46,12 +50,14 @@ class NominationsContainer extends Component {
 
 let mapStateToProps = state => {
   return {
+    currentUser: state.currentUser,
     teamData: state.team
   }
 };
 
 let mapDispatchToProps = dispatch => {
   return {
+    getCurrentUser: () => dispatch(getCurrentUser()),
     getTeam: (teamId) => dispatch(getTeam(teamId))
   }
 };

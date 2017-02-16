@@ -1,9 +1,11 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 
-let NewNominationForm = ({ handleSubmit, pristine, submitting, team, teamId }) => {
+let NewNominationForm = ({ currentUser, handleSubmit, pristine, submitting, team, teamId }) => {
   const options = team.users.map(user => {
-    return(<option key={user.id} value={user.id}>{user.name} ({user.handle})</option>)
+    if (user.id != currentUser.id) {
+      return(<option key={user.id} value={user.id}>{user.name} ({user.handle})</option>)
+    }
   })
 
   return (

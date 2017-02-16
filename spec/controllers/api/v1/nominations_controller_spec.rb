@@ -15,12 +15,12 @@ RSpec.describe Api::V1::NominationsController, type: :controller do
 
     it "successfully nominates a user" do
       session[:user_id] = nominator.id
-      expect { post :create, team_id: team.id, nomination: correct_nomination_params }.to change{ Nomination.count }.by 1
+      expect { post :create, params: { team_id: team.id, nomination: correct_nomination_params } }.to change{ Nomination.count }.by 1
     end
 
     it "returns an error when the payload is incorrect" do
       session[:user_id] = nominator.id
-      post :create, team_id: team.id, nomination: incorrect_nomination_params
+      post :create, params: { team_id: team.id, nomination: incorrect_nomination_params }
 
       expect(response.status).to eq 422
       expect(json_parsed_response.keys).to eq ["errors"]

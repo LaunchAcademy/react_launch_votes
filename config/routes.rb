@@ -9,6 +9,11 @@ Rails.application.routes.draw do
       resources :teams, only: :show do
         resources :nominations, only: [:create, :index]
       end
+      resources :users, only: [] do
+        collection do
+          resources :current, only: :index
+        end
+      end
     end
   end
 

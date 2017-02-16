@@ -12,11 +12,13 @@ import thunkMiddleware from 'redux-thunk';
 import App from './components/App'
 import NominationsContainer from './containers/NominationsContainer'
 
-import team from './reducers/getTeam'
+import currentUser from './reducers/getCurrentUser'
 import nomination from './reducers/postNomination'
+import team from './reducers/getTeam'
 
 const store = createStore(
   combineReducers({
+    currentUser,
     nomination,
     team,
     form: formReducer,

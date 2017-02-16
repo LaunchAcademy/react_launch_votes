@@ -32,8 +32,8 @@ let getTeam = (teamId) => {
     .then((response) => response.json())
     .then((responseData) => dispatch(getTeamRequestSuccess(responseData)))
     .catch(() => dispatch(getTeamRequestFailure()))
-  }
-}
+  };
+};
 
 export {
   GET_TEAM_REQUEST,
