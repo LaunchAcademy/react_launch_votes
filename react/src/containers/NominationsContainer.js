@@ -34,13 +34,12 @@ class NominationsContainer extends Component {
     }
     return(
       <div>
-        <h2>Hello from the <code>NominationsContainer.js</code> container.</h2>
         <div className="row">
           <div className="small-11 medium-7 small-centered columns">
             <NewNominationForm currentUser={this.props.currentUser.currentUser} team={this.props.teamData.team} onSubmit={this.postNomination} />
           </div>
         </div>
-        <div className="row">
+        <div className="row small-up-1 medium-up-3 large-up-4">
           {nominations}
         </div>
       </div>

@@ -2,7 +2,7 @@ import React from 'react';
 
 let Nomination = ({ nomination }) => {
   return (
-    <div className="small-12 medium-3 columns end">
+    <div className="column">
       <div className="callout secondary text-center">
         <img className="nomination" src={nomination.nominee.image_url} />
         <div>
