@@ -7,7 +7,7 @@
 -else
   .row
     .small-12.columns
-      %h1.text-center Welcome to LaunchVotes 2.0
+      %h1.text-center Welcome to LaunchVotes 3.0
       %h2.text-center For Weekly Nominations
       .row
         .small-11.medium-7.small-centered.columns
@@ -15,14 +15,36 @@
             %i.fa.fa-github
             Sign In with GitHub
       .callout
-        %h3.text-center About
+        %h2.text-center About
         %p
           LaunchVotes started as an innovative idea to promote the social
-          and lighthearted environment here at Launch Academy. We hope to creat
-          a platform for fellow Launchers to nominate each other for all the
-          strange and funny things that occur during the week.
+          and lighthearted environment here at Launch Academy. We hope to
+          create a platform for fellow Launchers to nominate each other for
+          all the strange and funny things that occur during the week.
       .callout.secondary
-        %h3.text-center Allow us to introduce ourselves&hellip;
+        %h2.text-center Credits & Recognition
+        %h3.text-center LaunchVotes 3.0 (React.js/Rails) Was Created By:
+        .text-center
+          =image_tag "Eben-Lowe.jpg", class: "nomination"
+          %h4 Eben Lowe
+          %h5
+            = link_to "https://github.com/enthusiastick" do
+              %i.fa.fa-github
+              GitHub
+        %hr/
+        %h3.text-center LaunchVotes 2.0 (Rails) Was Created By:
+        .text-center
+          = image_tag "David-Rodriguez-Fuentes.jpg", class: "nomination"
+          %h4 David Rodriguez Fuentes
+          %h5
+            = link_to "https://github.com/davidrf" do
+              %i.fa.fa-github
+              GitHub
+        %hr/
+        %h3.text-center
+          Last But Not Least,
+          %br/
+          The LaunchVotes 1.0 (Sinatra) Team:
         .row
           .small-12.medium-6.columns
             .text-center
