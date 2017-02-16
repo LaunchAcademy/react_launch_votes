@@ -10,7 +10,7 @@ RSpec.describe Api::V1::CurrentController, type: :controller do
       session[:user_id] = user.id
       get :index, params: { user: {} }
 
-      expect(json_parsed_response.keys).to eq ["id", "handle", "image_url", "name"]
+      expect(json_parsed_response.keys).to eq ["admin?", "id", "name", "teams"]
       expect(json_parsed_response["name"]).to eq user.name
     end
   end
