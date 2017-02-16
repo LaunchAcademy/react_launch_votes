@@ -1,4 +1,4 @@
-import { reset } from 'redux-form';
+import { SubmissionError, reset } from 'redux-form';
 
 const POST_NOMINATION_REQUEST = "POST_NOMINATION_REQUEST";
 const POST_NOMINATION_REQUEST_SUCCESS = "POST_NOMINATION_REQUEST_SUCCESS";
@@ -56,6 +56,7 @@ let postNomination = (values) => {
     })
     .catch(errors => {
       dispatch(postNominationRequestFailure())
+      throw new SubmissionError({'_error': errors});
     })
   }
 }

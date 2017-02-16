@@ -1,12 +1,19 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 
-let NewNominationForm = ({ currentUser, handleSubmit, pristine, submitting, team, teamId }) => {
+let NewNominationForm = ({ currentUser, error, handleSubmit, pristine, submitting, team, teamId }) => {
   const options = team.users.map(user => {
     if (user.id != currentUser.id) {
       return(<option key={user.id} value={user.id}>{user.name} ({user.handle})</option>)
     }
   })
+
+  let errors;
+  if (error) {
+    error = error.map(error => {
+      return(<div className="callout alert" key={error}><i className="fa fa-exclamation-triangle"/>&nbsp;{error}</div>)
+    })
+  }
 
   return (
     <div className="callout primary">
@@ -17,6 +24,7 @@ let NewNominationForm = ({ currentUser, handleSubmit, pristine, submitting, team
           {options}
         </Field>
         <Field name="body" component="input" type="text" placeholder="Most help requests" />
+        {error}
         <div className="text-center">
           <button className="button secondary" disabled={pristine || submitting} type="submit">
             Submit
