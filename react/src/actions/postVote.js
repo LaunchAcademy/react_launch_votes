@@ -1,6 +1,7 @@
 const POST_VOTE_REQUEST = "POST_VOTE_REQUEST";
 const POST_VOTE_REQUEST_SUCCESS = "POST_VOTE_REQUEST_SUCCESS";
 const POST_VOTE_REQUEST_FAILURE = "POST_VOTE_REQUEST_FAILURE";
+const ADD_VOTE_TO_PAGE = "ADD_VOTE_TO_PAGE";
 
 let postVoteRequest = () => {
   return {
@@ -47,6 +48,7 @@ let postVote = (nominationId) => {
     })
     .then(nomination => {
       dispatch(postVoteRequestSuccess())
+      dispatch(addVoteToPage(nomination))
     })
     .catch(errors => {
       dispatch(postVoteRequestFailure())
@@ -54,15 +56,24 @@ let postVote = (nominationId) => {
   }
 }
 
+let addVoteToPage = (nomination) => {
+  return {
+    type: ADD_VOTE_TO_PAGE,
+    nomination
+  }
+}
+
 export {
   POST_VOTE_REQUEST,
   POST_VOTE_REQUEST_SUCCESS,
-  POST_VOTE_REQUEST_FAILURE
+  POST_VOTE_REQUEST_FAILURE,
+  ADD_VOTE_TO_PAGE
 }
 
 export {
   postVote,
   postVoteRequest,
   postVoteRequestSuccess,
-  postVoteRequestFailure
+  postVoteRequestFailure,
+  addVoteToPage
 }
