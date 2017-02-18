@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import { getCurrentUser } from '../actions/getCurrentUser';
 import { getNomination } from '../actions/getNomination';
+import { patchNomination } from '../actions/patchNomination'
 import EditNominationForm from '../components/EditNominationForm';
 
 class EditNominationFormContainer extends Component {
@@ -19,8 +20,7 @@ class EditNominationFormContainer extends Component {
   }
 
   patchNomination(fields, dispatch) {
-    debugger
-    // return dispatch(patchNomination(fields));
+    return dispatch(patchNomination(fields));
   }
 
   render() {

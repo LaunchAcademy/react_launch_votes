@@ -4,6 +4,12 @@ import { Link } from 'react-router';
 import { Field, reduxForm } from 'redux-form';
 
 let EditNominationForm = ({ currentUser, error, handleSubmit, nomination, pristine, submitting, teamId }) => {
+  if (error) {
+    error = error.map(error => {
+      return(<div className="callout alert" key={error}><i className="fa fa-exclamation-triangle"/>&nbsp;{error}</div>)
+    })
+  }
+
   return(
     <div className="callout secondary text-center">
       <img className="nomination" src={nomination.nominee.image_url} />
@@ -13,6 +19,7 @@ let EditNominationForm = ({ currentUser, error, handleSubmit, nomination, pristi
       </div>
       <form onSubmit={handleSubmit}>
         <Field name="body" component="input" type="text" />
+        {error}
         <div className="button-group">
           <button className="button" disabled={pristine || submitting} type="submit">
             Edit

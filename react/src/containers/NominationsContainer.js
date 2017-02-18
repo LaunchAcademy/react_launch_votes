@@ -30,7 +30,7 @@ class NominationsContainer extends Component {
     if (this.props.currentUser && this.props.teamData.team) {
       nominations = this.props.teamData.team.nominations.map(nomination => {
         if (nomination.nominee_id != currentUser.id) {
-          return(<Nomination key={nomination.id} currentUser={currentUser} nomination={nomination} voteHandler={this.props.voteHandler} />)
+          return(<Nomination key={nomination.id} currentUser={currentUser} nomination={nomination} teamId={this.props.params.teamId} voteHandler={this.props.voteHandler} />)
         }
       })
     }

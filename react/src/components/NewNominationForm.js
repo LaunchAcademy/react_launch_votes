@@ -8,7 +8,6 @@ let NewNominationForm = ({ currentUser, error, handleSubmit, pristine, submittin
     }
   })
 
-  let errors;
   if (error) {
     error = error.map(error => {
       return(<div className="callout alert" key={error}><i className="fa fa-exclamation-triangle"/>&nbsp;{error}</div>)
