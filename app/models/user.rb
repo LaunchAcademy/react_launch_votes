@@ -6,6 +6,7 @@ class User < ApplicationRecord
   has_many :nominations, foreign_key: :nominee_id
   has_many :memberships
   has_many :teams, through: :memberships
+  has_many :votes
 
   validates_format_of :email, with: EMAIL_REGEXP, allow_blank: true
   validates_format_of :image_url, with: URI::regexp(["http", "https"])

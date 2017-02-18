@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170206043850) do
+ActiveRecord::Schema.define(version: 20170217235801) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,6 +56,16 @@ ActiveRecord::Schema.define(version: 20170206043850) do
     t.datetime "updated_at",                 null: false
     t.index ["github_id"], name: "index_users_on_github_id", unique: true, using: :btree
     t.index ["handle"], name: "index_users_on_handle", unique: true, using: :btree
+  end
+
+  create_table "votes", force: :cascade do |t|
+    t.integer  "nomination_id", null: false
+    t.integer  "user_id",       null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["nomination_id", "user_id"], name: "index_votes_on_nomination_id_and_user_id", unique: true, using: :btree
+    t.index ["nomination_id"], name: "index_votes_on_nomination_id", using: :btree
+    t.index ["user_id"], name: "index_votes_on_user_id", using: :btree
   end
 
 end
