@@ -20,7 +20,6 @@ let NewNominationForm = ({ currentUser, error, handleSubmit, pristine, submittin
       <h3 className="text-center">Nominate A Fellow Launcher:</h3>
       <form onSubmit={handleSubmit}>
         <Field name="nominee_id" component="select" type="select">
-          <option></option>
           {options}
         </Field>
         <Field name="body" component="input" type="text" placeholder="Most help requests" />

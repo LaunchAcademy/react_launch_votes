@@ -22,6 +22,8 @@ class Nomination < ApplicationRecord
   end
 
   def voter_ids
-    votes.map(&:id)
+    voter_ids = Hash.new
+    votes.map { |vote| voter_ids[vote.user.id] = vote.id }
+    voter_ids
   end
 end
