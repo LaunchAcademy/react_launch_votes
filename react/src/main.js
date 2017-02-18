@@ -15,12 +15,14 @@ import NominationsContainer from './containers/NominationsContainer'
 import currentUser from './reducers/getCurrentUser'
 import nomination from './reducers/postNomination'
 import team from './reducers/getTeam'
+import vote from './reducers/postVote'
 
 const store = createStore(
   combineReducers({
     currentUser,
     nomination,
     team,
+    vote,
     form: formReducer,
     routing: routerReducer
   }),

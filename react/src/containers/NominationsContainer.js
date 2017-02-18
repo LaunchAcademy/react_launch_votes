@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { getCurrentUser } from '../actions/getCurrentUser';
 import { getTeam } from '../actions/getTeam';
 import { postNomination } from '../actions/postNomination';
+import { postVote } from '../actions/postVote';
 import NewNominationForm from '../components/NewNominationForm';
 import Nomination from '../components/Nomination';
 
@@ -28,7 +29,7 @@ class NominationsContainer extends Component {
     if (this.props.currentUser && this.props.teamData.team) {
       nominations = this.props.teamData.team.nominations.map(nomination => {
         if (nomination.nominee_id != currentUser.id) {
-          return(<Nomination key={nomination.id} currentUser={currentUser} nomination={nomination} />)
+          return(<Nomination key={nomination.id} currentUser={currentUser} nomination={nomination} voteHandler={this.props.voteHandler} />)
         }
       })
     }
@@ -57,7 +58,14 @@ let mapStateToProps = state => {
 let mapDispatchToProps = dispatch => {
   return {
     getCurrentUser: () => dispatch(getCurrentUser()),
-    getTeam: (teamId) => dispatch(getTeam(teamId))
+    getTeam: (teamId) => dispatch(getTeam(teamId)),
+    voteHandler: (nominationId, voteId) => {
+      if (voteId) {
+        debugger
+      } else {
+        dispatch(postVote(nominationId))
+      }
+    }
   }
 };
 

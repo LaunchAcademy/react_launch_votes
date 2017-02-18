@@ -14,6 +14,7 @@ Rails.application.routes.draw do
           resources :current, only: :index
         end
       end
+      resources :votes, only: [:create, :destroy]
     end
   end
 
