@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { deleteVote } from '../actions/deleteVote';
 import { getCurrentUser } from '../actions/getCurrentUser';
 import { getTeam } from '../actions/getTeam';
 import { postNomination } from '../actions/postNomination';
@@ -61,7 +62,7 @@ let mapDispatchToProps = dispatch => {
     getTeam: (teamId) => dispatch(getTeam(teamId)),
     voteHandler: (nominationId, voteId) => {
       if (voteId) {
-        debugger
+        dispatch(deleteVote(voteId))
       } else {
         dispatch(postVote(nominationId))
       }

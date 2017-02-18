@@ -12,6 +12,10 @@ import {
   ADD_VOTE_TO_PAGE
 } from '../actions/postVote';
 
+import {
+  REMOVE_VOTE_FROM_PAGE
+} from '../actions/deleteVote';
+
 let initialState = {
   team: {
     id: null,
@@ -50,8 +54,8 @@ const team = (state = initialState, action) => {
     case ADD_VOTE_TO_PAGE:
       let voteAddedNominations;
       voteAddedNominations = state.team.nominations;
-      let nominationIndex = voteAddedNominations.findIndex(nomination => nomination.id == action.nomination.nomination.id);
-      voteAddedNominations.splice(nominationIndex, 1, action.nomination.nomination);
+      let upvotedNominationIndex = voteAddedNominations.findIndex(nomination => nomination.id == action.nomination.nomination.id);
+      voteAddedNominations.splice(upvotedNominationIndex, 1, action.nomination.nomination);
       return Object.assign({}, state, {
         team: {
           id: state.team.id,
@@ -59,7 +63,20 @@ const team = (state = initialState, action) => {
           nominations: voteAddedNominations,
           users: state.team.users
         }
-      })
+      });
+    case REMOVE_VOTE_FROM_PAGE:
+      let voteRemovedNominations;
+      voteRemovedNominations = state.team.nominations;
+      let downvotedNominationIndex = voteRemovedNominations.findIndex(nomination => nomination.id == action.nomination.nomination.id);
+      voteRemovedNominations.splice(downvotedNominationIndex, 1, action.nomination.nomination);
+      return Object.assign({}, state, {
+        team: {
+          id: state.team.id,
+          name: state.team.name,
+          nominations: voteRemovedNominations,
+          users: state.team.users
+        }
+      });
     default:
       return state;
   }

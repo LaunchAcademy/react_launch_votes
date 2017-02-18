@@ -23,7 +23,7 @@ let postVoteRequestFailure = () => {
 
 let postVote = (nominationId) => {
   let payload = JSON.stringify({ nomination_id: nominationId })
-  return (dispatch, getState) => {
+  return (dispatch) => {
     dispatch(postVoteRequest());
     return fetch('/api/v1/votes.json', {
       credentials: 'same-origin',

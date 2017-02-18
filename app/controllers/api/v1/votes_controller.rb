@@ -10,6 +10,15 @@ class Api::V1::VotesController < Api::ApiController
     end
   end
 
+  def destroy
+    vote = Vote.find(params[:id])
+    if vote.destroy
+      render json: vote.nomination
+    else
+      render_object_errors(vote)
+    end
+  end
+
   private
 
   def vote_params
