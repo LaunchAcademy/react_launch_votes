@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :teams, only: :show do
-        resources :nominations, only: [:create, :index]
+        resources :nominations, only: [:create, :index, :show]
       end
       resources :users, only: [] do
         collection do
@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   resources :auth, only: :show
   resources :sessions, only: :new
   resources :teams, only: [] do
-    resources :nominations, only: :index
+    resources :nominations, only: [:edit, :index]
   end
   resources :user_teams, only: :edit
   resources :users, only: :show

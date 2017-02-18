@@ -12,6 +12,11 @@ class Api::V1::NominationsController < Api::ApiController
     end
   end
 
+  def show
+    nomination = Nomination.find(params[:id])
+    render json: nomination
+  end
+
   private
 
   def create_params

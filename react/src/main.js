@@ -10,10 +10,12 @@ import { reducer as formReducer } from 'redux-form'
 import thunkMiddleware from 'redux-thunk';
 
 import App from './components/App'
+import EditNominationFormContainer from './containers/EditNominationFormContainer'
 import NominationsContainer from './containers/NominationsContainer'
 
 import currentUser from './reducers/getCurrentUser'
-import nomination from './reducers/postNomination'
+import nomination from './reducers/getNomination'
+import postNomination from './reducers/postNomination'
 import team from './reducers/getTeam'
 import vote from './reducers/postVote'
 
@@ -21,6 +23,7 @@ const store = createStore(
   combineReducers({
     currentUser,
     nomination,
+    postNomination,
     team,
     vote,
     form: formReducer,
@@ -39,6 +42,7 @@ $(function() {
       <Router history={history}>
         <Route path="/" component={App}>
           <Route path="teams/:teamId/nominations" component={NominationsContainer}/>
+          <Route path="teams/:teamId/nominations/:nominationId/edit" component={EditNominationFormContainer} />
         </Route>
       </Router>
     </Provider>,
