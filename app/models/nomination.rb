@@ -1,8 +1,12 @@
 class Nomination < ApplicationRecord
 
-  default_scope { by_nominee.newest_first }
+  default_scope { current_week.by_nominee.newest_first }
   scope :by_nominee, -> { joins(:nominee).order('name') }
   scope :newest_first, -> { order(created_at: :desc) }
+  scope :current_week,
+    -> { where("nominations.created_at > ?", Time.current.beginning_of_week) }
+  scope :previous_weeks,
+    -> { where("nominations.created_at < ?", Time.current.beginning_of_week) }
 
   belongs_to :nominator, class_name: "User"
   belongs_to :nominee, class_name: "User"
