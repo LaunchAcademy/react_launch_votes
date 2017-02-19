@@ -1,8 +1,8 @@
 .callout.secondary.text-center
   .award-ribbon.show-for-medium
-    %h1= nomination.votes_count
+    %h1= nomination.votes.count
   .ribbon.show-for-small-only
-    %h1= nomination.votes_count
+    %h1= nomination.votes.count
   = image_tag nomination.nominee.image_url, class: "image-award"
   %div
     %span.label.award

@@ -1,5 +1,15 @@
 .row
   .small-11.small-centered.columns
+    .callout.warning{data: { closable: "" } }
+      %p.bottomless
+        %strong Note:
+        If you would like to skip this step in the future, you can set a
+        default team from
+        =link_to "your profile page", user_path(current_user)
+        at any time.
+      %button.close-button{ "aria-label": "Dismiss alert", data: { close: "" }, type: "button" }
+        %span{ "aria-hidden": true } &times;
+    %h3.text-center Please Select Team:
     -@teams.each do |team|
       .callout.secondary.text-center
         =link_to team.name, team_nominations_path(team)

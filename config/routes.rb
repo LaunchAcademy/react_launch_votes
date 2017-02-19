@@ -27,6 +27,6 @@ Rails.application.routes.draw do
     resources :nominations, only: [:edit, :index]
   end
   resources :user_teams, only: :edit
-  resources :users, only: :show
+  resources :users, only: [:show, :update]
 end
 
