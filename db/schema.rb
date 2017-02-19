@@ -53,9 +53,10 @@ ActiveRecord::Schema.define(version: 20170217235801) do
     t.string   "image_url"
     t.integer  "launch_pass_id"
     t.string   "name"
-    t.integer  "sign_in_count",  default: 0
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.integer  "sign_in_count",   default: 0
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "default_team_id"
     t.index ["github_id"], name: "index_users_on_github_id", unique: true, using: :btree
     t.index ["handle"], name: "index_users_on_handle", unique: true, using: :btree
   end

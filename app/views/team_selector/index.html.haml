@@ -1,0 +1,5 @@
+.row
+  .small-11.small-centered.columns
+    -@teams.each do |team|
+      .callout.secondary.text-center
+        =link_to team.name, team_nominations_path(team)

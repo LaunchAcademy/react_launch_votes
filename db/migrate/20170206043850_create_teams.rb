@@ -15,6 +15,7 @@ class CreateTeams < ActiveRecord::Migration[5.0]
     end
 
     add_column :nominations, :team_id, :integer, null: false
+    add_column :users, :default_team_id, :integer
     add_index :memberships, [:team_id, :user_id], unique: true
     add_index :teams, :launch_pass_id, unique: true
   end

@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   get "auth/:provider/callback", to: "authentication_flows#create"
   delete "sign-out", to: "sessions#destroy"
+  get "team-selector", to: "team_selector#index"
 
   namespace :api do
     namespace :v1 do

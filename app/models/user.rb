@@ -3,6 +3,7 @@ class User < ApplicationRecord
 
   default_scope { order(:name) }
 
+  belongs_to :default_team, class_name: "Team", required: false
   has_many :nominations, foreign_key: :nominee_id
   has_many :memberships
   has_many :teams, through: :memberships
