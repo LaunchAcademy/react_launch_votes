@@ -9,6 +9,7 @@ import { postNomination } from '../actions/postNomination';
 import { postVote } from '../actions/postVote';
 import NewNominationForm from '../components/NewNominationForm';
 import Nomination from '../components/Nomination';
+import RefreshButton from '../components/RefreshButton';
 
 class NominationsContainer extends Component {
   constructor(props) {
@@ -25,6 +26,7 @@ class NominationsContainer extends Component {
     return dispatch(postNomination(fields));
   }
 
+
   render() {
     let nominations;
     let currentUser = this.props.currentUser.currentUser
@@ -39,13 +41,16 @@ class NominationsContainer extends Component {
     if (currentUser["admin?"]) {
       awardsLink = <a className="button large" href={`/teams/${this.props.teamData.team.id}/awards`}>See Awards</a>
     }
+    let refreshTeam = (teamId) => {
+      this.props.getTeam(teamId);
+    }
     return(
       <div>
         <div className="row">
           <div className="small-11 medium-7 small-centered columns">
             <NewNominationForm currentUser={this.props.currentUser.currentUser} team={this.props.teamData.team} onSubmit={this.postNomination} />
             <div className="text-center">
-              <h2>Nominations for {this.props.teamData.team.name}</h2>
+              <h2>Nominations for {this.props.teamData.team.name} <RefreshButton refreshTeam={refreshTeam} teamId={this.props.teamData.team.id}/></h2>
               {awardsLink}
             </div>
           </div>
