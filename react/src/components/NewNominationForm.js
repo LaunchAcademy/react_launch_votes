@@ -4,7 +4,11 @@ import { Field, reduxForm } from 'redux-form';
 let NewNominationForm = ({ currentUser, error, handleSubmit, pristine, submitting, team }) => {
   const options = team.users.map(user => {
     if (user.id != currentUser.id) {
-      return(<option key={user.id} value={user.id}>{user.name} ({user.handle})</option>)
+      if (user["admin?"]) {
+        return(<option key={user.id} value={user.id}>LA: {user.name} ({user.handle})</option>)
+      } else {
+        return(<option key={user.id} value={user.id}>{user.name} ({user.handle})</option>)
+      }
     }
   })
 
