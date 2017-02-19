@@ -2,16 +2,4 @@
   .small-11.medium-10.large-9.small-centered.columns
     %h1.text-center Weekly Awards for #{@team.name}
     -@awards.each do |nomination|
-      .callout.secondary.text-center
-        .award-ribbon.show-for-medium
-          %h1= nomination.votes_count
-        .ribbon.show-for-small-only
-          %h1= nomination.votes_count
-        = image_tag nomination.nominee.image_url, class: "image-award"
-        %div
-          %span.label.award
-            %h5
-              %i.fa.fa-github
-              = nomination.nominee.handle
-          %h2.pink= nomination.nominee.name
-          %h1= nomination.body
+      =render partial: "shared/award", locals: { nomination: nomination }
