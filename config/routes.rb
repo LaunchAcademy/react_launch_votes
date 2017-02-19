@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   resources :auth, only: :show
   resources :sessions, only: :new
   resources :teams, only: [] do
+    resources :awards, only: :index
     resources :nominations, only: [:edit, :index]
   end
   resources :user_teams, only: :edit

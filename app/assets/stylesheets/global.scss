@@ -11,6 +11,29 @@
   top: -1rem;
 }
 
+span.label.award {
+  position: relative;
+  top: -1.2rem;
+  h5 {
+    margin-bottom: 0px;
+  }
+}
+
+.award-ribbon {
+  background-image: url("/assets/pink_ribbon.png");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  height: 9rem;
+  left: 2rem;
+  position: absolute;
+  top: -0.4rem;
+  width: 9rem;
+
+  h1 {
+    padding: 1rem;
+  }
+}
+
 .ribbon {
   background-image: url("/assets/pink_ribbon.png");
   background-repeat: no-repeat;
@@ -22,7 +45,7 @@
   top: -0.2rem;
   width: 4.6rem;
 
-  p {
+  p, h1 {
     font-weight: bold;
     padding: 1rem;
   }

@@ -32,15 +32,17 @@ ActiveRecord::Schema.define(version: 20170217235801) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.integer  "team_id",      null: false
+    t.integer  "votes_count"
     t.index ["nominator_id"], name: "index_nominations_on_nominator_id", using: :btree
     t.index ["nominee_id"], name: "index_nominations_on_nominee_id", using: :btree
   end
 
   create_table "teams", force: :cascade do |t|
-    t.string   "name",           null: false
-    t.integer  "launch_pass_id", null: false
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.string   "name",                       null: false
+    t.integer  "launch_pass_id",             null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.integer  "vote_threshold", default: 1, null: false
     t.index ["launch_pass_id"], name: "index_teams_on_launch_pass_id", unique: true, using: :btree
   end
 

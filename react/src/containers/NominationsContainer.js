@@ -35,11 +35,19 @@ class NominationsContainer extends Component {
         }
       })
     }
+    let awardsLink;
+    if (currentUser["admin?"]) {
+      awardsLink = <a className="button large" href={`/teams/${this.props.teamData.team.id}/awards`}>See Awards</a>
+    }
     return(
       <div>
         <div className="row">
           <div className="small-11 medium-7 small-centered columns">
             <NewNominationForm currentUser={this.props.currentUser.currentUser} team={this.props.teamData.team} onSubmit={this.postNomination} />
+            <div className="text-center">
+              <h2>Nominations for {this.props.teamData.team.name}</h2>
+              {awardsLink}
+            </div>
           </div>
         </div>
         <div className="row small-up-1 medium-up-3 large-up-4">
