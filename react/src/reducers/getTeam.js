@@ -31,6 +31,13 @@ let initialState = {
 }
 
 const team = (state = initialState, action) => {
+  let downvotedNominationIndex;
+  let newNominations;
+  let nominationRemoved;
+  let upvotedNominationIndex;
+  let removedNominationIndex;
+  let voteRemovedNominations;
+  let voteAddedNominations;
   switch(action.type) {
     case GET_TEAM_REQUEST:
       return Object.assign({}, state, {
@@ -46,7 +53,7 @@ const team = (state = initialState, action) => {
         isFetchingTeam: false
       });
     case ADD_NOMINATION_TO_PAGE:
-      let newNominations = [action.nomination.nomination].concat(state.team.nominations);
+      newNominations = [action.nomination.nomination].concat(state.team.nominations);
       return Object.assign({}, state, {
         team: {
           id: state.team.id,
@@ -56,9 +63,8 @@ const team = (state = initialState, action) => {
         }
       });
     case ADD_VOTE_TO_PAGE:
-      let voteAddedNominations;
       voteAddedNominations = state.team.nominations;
-      let upvotedNominationIndex = voteAddedNominations.findIndex(nomination => nomination.id == action.nomination.nomination.id);
+      upvotedNominationIndex = voteAddedNominations.findIndex(nomination => nomination.id === action.nomination.nomination.id);
       voteAddedNominations.splice(upvotedNominationIndex, 1, action.nomination.nomination);
       return Object.assign({}, state, {
         team: {
@@ -69,9 +75,8 @@ const team = (state = initialState, action) => {
         }
       });
     case REMOVE_NOMINATION_FROM_PAGE:
-      let nominationRemoved;
       nominationRemoved = state.team.nominations;
-      let removedNominationIndex = nominationRemoved.findIndex(nomination => nomination.id == action.nomination.nomination.id);
+      removedNominationIndex = nominationRemoved.findIndex(nomination => nomination.id === action.nomination.nomination.id);
       nominationRemoved.splice(removedNominationIndex, 1);
       return Object.assign({}, state, {
         team: {
@@ -82,9 +87,8 @@ const team = (state = initialState, action) => {
         }
       });
     case REMOVE_VOTE_FROM_PAGE:
-      let voteRemovedNominations;
       voteRemovedNominations = state.team.nominations;
-      let downvotedNominationIndex = voteRemovedNominations.findIndex(nomination => nomination.id == action.nomination.nomination.id);
+      downvotedNominationIndex = voteRemovedNominations.findIndex(nomination => nomination.id === action.nomination.nomination.id);
       voteRemovedNominations.splice(downvotedNominationIndex, 1, action.nomination.nomination);
       return Object.assign({}, state, {
         team: {
