@@ -2,10 +2,15 @@ import React from 'react';
 import { Link } from 'react-router';
 import Vote from './Vote';
 
-let Nomination = ({ currentUser, nomination, teamId, voteHandler }) => {
+let Nomination = ({ currentUser, deleteNominationHandler, nomination, teamId, voteHandler }) => {
+  let handleDeleteClick = () => {
+    if (confirm('Are you sure?')) {
+      deleteNominationHandler(nomination.id)
+    }
+  }
   let navButtons;
   if (currentUser["admin?"] || nomination.nominator_id === currentUser.id) {
-    navButtons = <div className="button-group"><Link className="button" to={`/teams/${teamId}/nominations/${nomination.id}/edit`}>Edit</Link><div className="button">Delete</div></div>
+    navButtons = <div className="button-group"><Link className="button" to={`/teams/${teamId}/nominations/${nomination.id}/edit`}>Edit</Link><div className="button" onClick={handleDeleteClick}>Delete</div></div>
   }
   let voteId;
   if (Object.keys(nomination.voter_ids).includes(String(currentUser.id))) {

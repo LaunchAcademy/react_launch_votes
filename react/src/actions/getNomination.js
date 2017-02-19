@@ -24,7 +24,7 @@ let getNominationRequestFailure = () => {
 let getNomination = (teamId, nominationId) => {
   return dispatch => {
     dispatch(getNominationRequest());
-    fetch(`/api/v1/teams/${teamId}/nominations/${nominationId}`, {
+    fetch(`/api/v1/teams/${teamId}/nominations/${nominationId}.json`, {
       credentials: 'same-origin',
       method: 'GET',
       headers: { 'Content-Type': 'application/json' }

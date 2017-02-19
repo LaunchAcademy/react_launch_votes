@@ -14,6 +14,8 @@ import EditNominationFormContainer from './containers/EditNominationFormContaine
 import NominationsContainer from './containers/NominationsContainer'
 
 import currentUser from './reducers/getCurrentUser'
+import deleteNomination from './reducers/deleteNomination'
+import deleteVote from './reducers/deleteVote'
 import nomination from './reducers/getNomination'
 import patchNomination from './reducers/patchNomination'
 import postNomination from './reducers/postNomination'
@@ -23,6 +25,8 @@ import vote from './reducers/postVote'
 const store = createStore(
   combineReducers({
     currentUser,
+    deleteNomination,
+    deleteVote,
     nomination,
     patchNomination,
     postNomination,

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { deleteNomination } from '../actions/deleteNomination';
 import { deleteVote } from '../actions/deleteVote';
 import { getCurrentUser } from '../actions/getCurrentUser';
 import { getTeam } from '../actions/getTeam';
@@ -30,7 +31,7 @@ class NominationsContainer extends Component {
     if (this.props.currentUser && this.props.teamData.team) {
       nominations = this.props.teamData.team.nominations.map(nomination => {
         if (nomination.nominee_id != currentUser.id) {
-          return(<Nomination key={nomination.id} currentUser={currentUser} nomination={nomination} teamId={this.props.params.teamId} voteHandler={this.props.voteHandler} />)
+          return(<Nomination key={nomination.id} currentUser={currentUser} deleteNominationHandler={this.props.deleteNominationHandler} nomination={nomination} teamId={this.props.params.teamId} voteHandler={this.props.voteHandler} />)
         }
       })
     }
@@ -58,6 +59,7 @@ let mapStateToProps = state => {
 
 let mapDispatchToProps = dispatch => {
   return {
+    deleteNominationHandler: (nominationId) => dispatch(deleteNomination(nominationId)),
     getCurrentUser: () => dispatch(getCurrentUser()),
     getTeam: (teamId) => dispatch(getTeam(teamId)),
     voteHandler: (nominationId, voteId) => {

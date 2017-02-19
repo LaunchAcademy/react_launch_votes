@@ -13,6 +13,10 @@ import {
 } from '../actions/postVote';
 
 import {
+  REMOVE_NOMINATION_FROM_PAGE
+} from '../actions/deleteNomination';
+
+import {
   REMOVE_VOTE_FROM_PAGE
 } from '../actions/deleteVote';
 
@@ -61,6 +65,19 @@ const team = (state = initialState, action) => {
           id: state.team.id,
           name: state.team.name,
           nominations: voteAddedNominations,
+          users: state.team.users
+        }
+      });
+    case REMOVE_NOMINATION_FROM_PAGE:
+      let nominationRemoved;
+      nominationRemoved = state.team.nominations;
+      let removedNominationIndex = nominationRemoved.findIndex(nomination => nomination.id == action.nomination.nomination.id);
+      nominationRemoved.splice(removedNominationIndex, 1);
+      return Object.assign({}, state, {
+        team: {
+          id: state.team.id,
+          name: state.team.name,
+          nominations: nominationRemoved,
           users: state.team.users
         }
       });

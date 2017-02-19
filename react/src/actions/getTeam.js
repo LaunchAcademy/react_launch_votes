@@ -24,7 +24,7 @@ let getTeamRequestFailure = () => {
 let getTeam = (teamId) => {
   return dispatch => {
     dispatch(getTeamRequest());
-    fetch(`/api/v1/teams/${teamId}`, {
+    fetch(`/api/v1/teams/${teamId}.json`, {
       credentials: 'same-origin',
       method: 'GET',
       headers: { 'Content-Type': 'application/json' }

@@ -12,6 +12,19 @@ class Api::V1::NominationsController < Api::ApiController
     end
   end
 
+  def destroy
+    nomination = Nomination.find(params[:id])
+    if current_user.admin? || current_user == nomination.nominator
+      if nomination.destroy
+        render json: nomination
+      else
+        render_object_errors(nomination)
+      end
+    else
+      render json: { errors: ["Only admin or nominator may delete nomination."] }
+    end
+  end
+
   def show
     nomination = Nomination.find(params[:id])
     render json: nomination

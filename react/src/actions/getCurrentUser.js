@@ -24,7 +24,7 @@ let getCurrentUserRequestFailure = () => {
 let getCurrentUser = () => {
   return dispatch => {
     dispatch(getCurrentUserRequest());
-    fetch('/api/v1/users/current', {
+    fetch('/api/v1/users/current.json', {
       credentials: 'same-origin',
       method: 'GET',
       headers: { 'Content-Type': 'application/json' }

@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
+      resources :nominations, only: :destroy
       resources :teams, only: :show do
         resources :nominations, only: [:create, :index, :show, :update]
       end
