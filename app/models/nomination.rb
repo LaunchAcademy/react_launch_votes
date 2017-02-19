@@ -8,6 +8,7 @@ class Nomination < ApplicationRecord
 
   validates_presence_of :body
   validates :body, length: { maximum: 160 }
+  validate :nominator_not_nominee
   validate :users_belong_to_team
 
   scope :by_nominee, -> { joins(:nominee).order('name') }
@@ -17,6 +18,14 @@ class Nomination < ApplicationRecord
     -> { where("nominations.created_at > ?", Time.current.beginning_of_week) }
   scope :previous_weeks,
     -> { where("nominations.created_at < ?", Time.current.beginning_of_week) }
+
+  def nominator_not_nominee
+    unless nominator.nil? || nominee.nil?
+      if nominator == nominee
+        errors.add(:nominator, "can't nominate themself")
+      end
+    end
+  end
 
   def users_belong_to_team
     unless nominator.nil? || nominator.admin? || nominator.teams.include?(team)
