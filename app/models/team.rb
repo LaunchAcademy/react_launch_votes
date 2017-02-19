@@ -6,6 +6,8 @@ class Team < ApplicationRecord
   validates_presence_of :name
   validates_uniqueness_of :launch_pass_id
 
+  scope :active, -> { where(active: true).order(:name) }
+
   def users
     (members + Team.admins.members).uniq
   end

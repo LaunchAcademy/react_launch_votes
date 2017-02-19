@@ -8,9 +8,6 @@ describe Nomination, type: :model do
   it { should belong_to(:team) }
 
   it { should validate_presence_of(:body) }
-  it { should validate_presence_of(:nominator) }
-  it { should validate_presence_of(:nominee) }
-  it { should validate_presence_of(:team) }
 
   describe "validates nominator/nominee belong to team (or are admins)" do
     let(:admin) { create(:admin_user) }

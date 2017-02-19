@@ -38,11 +38,12 @@ ActiveRecord::Schema.define(version: 20170217235801) do
   end
 
   create_table "teams", force: :cascade do |t|
-    t.string   "name",                       null: false
-    t.integer  "launch_pass_id",             null: false
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-    t.integer  "vote_threshold", default: 1, null: false
+    t.boolean  "active",         default: true, null: false
+    t.string   "name",                          null: false
+    t.integer  "launch_pass_id",                null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.integer  "vote_threshold", default: 1,    null: false
     t.index ["launch_pass_id"], name: "index_teams_on_launch_pass_id", unique: true, using: :btree
   end
 
