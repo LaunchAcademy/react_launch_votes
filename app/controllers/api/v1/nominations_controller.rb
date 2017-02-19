@@ -32,10 +32,14 @@ class Api::V1::NominationsController < Api::ApiController
 
   def update
     nomination = Nomination.find(params[:id])
-    if nomination.update(update_params)
-      render json: nomination.team
+    if current_user.admin? || current_user == nomination.nominator
+      if nomination.update(update_params)
+        render json: nomination.team
+      else
+        render_object_errors(nomination)
+      end
     else
-      render_object_errors(nomination)
+      render json: { errors: ["Only admin or nominator may edit nomination."] }
     end
   end
 
