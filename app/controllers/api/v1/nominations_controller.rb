@@ -1,5 +1,11 @@
 class Api::V1::NominationsController < Api::ApiController
 
+  def authorize_nomination_owner_or_admin(nomination)
+    unless current_user.admin? || current_user == nomination.nominator
+      render json: { errors: ["Forbidden"] }, status: 403
+    end
+  end
+
   def create
     team = Team.find(params[:team_id])
     nomination = Nomination.new(create_params)
@@ -14,14 +20,11 @@ class Api::V1::NominationsController < Api::ApiController
 
   def destroy
     nomination = Nomination.find(params[:id])
-    if current_user.admin? || current_user == nomination.nominator
-      if nomination.destroy
-        render json: nomination
-      else
-        render_object_errors(nomination)
-      end
+    authorize_nomination_owner_or_admin(nomination)
+    if nomination.destroy
+      render json: nomination
     else
-      render json: { errors: ["Only admin or nominator may delete nomination."] }
+      render_object_errors(nomination)
     end
   end
 
@@ -32,6 +35,7 @@ class Api::V1::NominationsController < Api::ApiController
 
   def update
     nomination = Nomination.find(params[:id])
+    authorize_nomination_owner_or_admin(nomination)
     if nomination.update(update_params)
       render json: nomination.team
     else
