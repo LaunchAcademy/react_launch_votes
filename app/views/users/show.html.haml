@@ -5,9 +5,9 @@
         %h3 Default Team:
         =form_for current_user do |f|
           -if current_user.admin?
-            =f.select :default_team_id, options_from_collection_for_select(Team.active, :id, :name, current_user.default_team_id)
+            =f.select :default_team_id, content_tag(:option, nil, value: nil) + options_from_collection_for_select(Team.active, :id, :name, current_user.default_team_id)
           -else
-            =f.select :default_team_id, options_from_collection_for_select(current_user.teams, :id, :name, current_user.default_team_id)
+            =f.select :default_team_id, content_tag(:option, nil, value: nil) + options_from_collection_for_select(current_user.teams, :id, :name, current_user.default_team_id)
           =f.submit "Save", class: "button secondary"
 .row
   .small-11.medium-10.large-9.small-centered.columns

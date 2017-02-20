@@ -1,0 +1,36 @@
+.row
+  .small-11.medium-7.small-centered.columns
+    %nav{"aria-label": "You are here:", role: "navigation"}
+      %ul.breadcrumbs
+        %li.disabled Admin
+        %li
+          =link_to "Teams", admin_teams_path
+        %li
+          %span.show-for-sr Current:
+          =@team.name
+    .callout.primary
+      %h3.text-center= @team.name
+      =form_for [:admin, @team] do |f|
+        %fieldset
+          =f.check_box :active
+          =f.label "Active?"
+        %fieldset
+          .row
+            .small-3.medium-2.columns
+              =f.number_field :vote_threshold
+            .small-9.medium-10.columns
+              %label.middle Vote Threshold
+        .text-center
+          =f.submit "Save", class: "button secondary"
+    %table.hover.stack
+      %thead
+        %tr
+          %th.text-center Handle
+          %th.text-center Name
+          %th.text-center Sign In Count
+      %tbody
+        -@team.members.each do |user|
+          %tr
+            %td= link_to user.handle, user_path(user)
+            %td= user.name
+            %td.text-right= user.sign_in_count

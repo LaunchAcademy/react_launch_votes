@@ -5,6 +5,10 @@ Rails.application.routes.draw do
   delete "sign-out", to: "sessions#destroy"
   get "team-selector", to: "team_selector#index"
 
+  namespace :admin do
+    resources :teams, only: [:index, :show, :update]
+  end
+
   namespace :api do
     namespace :v1 do
       resources :nominations, only: :destroy

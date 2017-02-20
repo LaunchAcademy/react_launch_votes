@@ -4,6 +4,7 @@ class Team < ApplicationRecord
   has_many :members, through: :memberships, source: :user
 
   validates_presence_of :name
+  validates_numericality_of :vote_threshold, greater_than: 0, only_integer: true
   validates_uniqueness_of :launch_pass_id
 
   scope :active, -> { where(active: true).order(:name) }

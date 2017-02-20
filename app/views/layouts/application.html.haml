@@ -32,6 +32,11 @@
                       = link_to user_path(current_user), class: "button" do
                         %i.fa.fa-user-circle
                         My Profile
+                    -if current_user.admin?
+                      %li
+                        = link_to admin_teams_path, class: "button" do
+                          %i.fa.fa-rocket
+                          Admin
                     %li
                       = link_to sign_out_path, class: "button", method: :delete do
                         %i.fa.fa-sign-out

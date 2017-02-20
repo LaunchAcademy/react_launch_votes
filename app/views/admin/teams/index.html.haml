@@ -1,0 +1,20 @@
+.row
+  .small-11.medium-7.small-centered.columns
+    %nav{"aria-label": "You are here:", role: "navigation"}
+      %ul.breadcrumbs
+        %li.disabled Admin
+        %li
+          %span.show-for-sr Current:
+          Teams
+    %table.hover.stack
+      %thead
+        %tr
+          %th.text-center Name
+          %th.text-center Members
+          %th.text-center Active
+      %tbody
+        -@teams.each do |team|
+          %tr
+            %td= link_to team.name, admin_team_path(team)
+            %td.text-right= team.members.count
+            %td= team.active?
