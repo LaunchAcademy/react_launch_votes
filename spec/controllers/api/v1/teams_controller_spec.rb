@@ -13,6 +13,7 @@ RSpec.describe Api::V1::TeamsController, type: :controller do
     let!(:nomination2) { create :nomination, body: "Best Hair", nominator: amanda, nominee: farah, team: team }
 
     it "returns a serialized team, with nested serialized nominations and users" do
+      session[:user_id] = farah.id
       get :show, params: { id: team.id }
 
       expect(json_parsed_response.keys).to eq ["id", "name", "nominations", "users"]
