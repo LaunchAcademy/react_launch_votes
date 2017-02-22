@@ -2,7 +2,7 @@ class Api::V1::NominationsController < Api::ApiController
 
   def authorize_nomination_owner_or_admin(nomination)
     unless current_user.admin? || current_user == nomination.nominator
-      render json: { errors: ["Forbidden"] }, status: 403
+      render json: { errors: ["Forbidden"] }, status: :forbidden
     end
   end
 
@@ -30,6 +30,7 @@ class Api::V1::NominationsController < Api::ApiController
 
   def show
     nomination = Nomination.find(params[:id])
+    authorize_nomination_owner_or_admin(nomination)
     render json: nomination
   end
 
