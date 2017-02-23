@@ -1,12 +1,13 @@
-var config = {
-  entry: {
-    path: './react/src/main.js',
-  },
+var path = require('path');
+var webpack = require("webpack");
+
+module.exports = {
+  entry: './react/src/main.js',
   output: {
-    path: './app/assets/javascripts',
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, '../app/assets/javascripts')
   },
-  module: {
+   module: {
     loaders: [
       {
         test: /\.jsx?$/,
@@ -16,14 +17,4 @@ var config = {
     ]
   },
   devtool: 'eval-source-map'
-}
-
-if (process.env.NODE_ENV === 'production') {
-  delete config.devtool;
-  var webpack = require('webpack');
-  config.plugins = [
-    new webpack.DefinePlugin({ 'process.env.NODE_ENV': '"production"' })
-  ];
-}
-
-module.exports = config;
+};
