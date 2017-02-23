@@ -1,18 +1,21 @@
-var path = require('path');
-var webpack = require("webpack");
+const path = require("path");
+const webpack = require("webpack");
 
 module.exports = {
-  entry: './react/src/main.js',
+  entry: {
+    script: path.resolve(__dirname, './src/main.js')
+  },
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, '../app/assets/javascripts')
+    path: path.resolve(__dirname, '../app/assets/javascripts'),
+    pathinfo: true
   },
    module: {
-    loaders: [
+    rules: [
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        loader: 'babel-loader'
+        use: 'babel-loader'
       }
     ]
   },

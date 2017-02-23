@@ -27,38 +27,7 @@ module.exports = function(config) {
     },
 
     // webpack configuration used by karma-webpack
-    webpack: {
-      // generate sourcemaps
-      devtool: 'eval-source-map',
-      // enzyme-specific setup
-      externals: {
-        'cheerio': 'window',
-        'react/addons': true,
-        'react/lib/ExecutionEnvironment': true,
-        'react/lib/ReactContext': true
-      },
-      module: {
-        loaders: [
-          // use babel-loader to transpile the test and src folders
-          {
-            test: /\.jsx?$/,
-            exclude: /node_modules/,
-            loader: 'babel'
-          },
-          // use isparta-loader for ES6 code coverage in the src folder
-          {
-            test: /\.jsx?$/,
-            exclude: /(node_modules|test)/,
-            loader: 'isparta'
-          }
-        ]
-      },
-
-      // relative path starts out at the src folder when importing modules
-      resolve: {
-        root: path.resolve(__dirname, 'src'),
-      }
-    },
+    webpack: require("./webpack.config.js"),
 
     webpackMiddleware: {
       // do not output webpack build information to the browser's console
