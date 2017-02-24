@@ -1,9 +1,7 @@
 class Api::V1::NominationsController < Api::ApiController
 
   def authorize_nomination_owner_or_admin(nomination)
-    unless current_user.admin? || current_user == nomination.nominator
-      render json: { errors: ["Forbidden"] }, status: :forbidden
-    end
+    !current_user.admin? && current_user != nomination.nominator
   end
 
   def create
@@ -20,8 +18,9 @@ class Api::V1::NominationsController < Api::ApiController
 
   def destroy
     nomination = Nomination.find(params[:id])
-    authorize_nomination_owner_or_admin(nomination)
-    if nomination.destroy
+    if authorize_nomination_owner_or_admin(nomination)
+      render json: { errors: ["Forbidden"] }, status: :forbidden
+    elsif nomination.destroy
       render json: nomination
     else
       render_object_errors(nomination)
@@ -30,14 +29,18 @@ class Api::V1::NominationsController < Api::ApiController
 
   def show
     nomination = Nomination.find(params[:id])
-    authorize_nomination_owner_or_admin(nomination)
-    render json: nomination
+    if authorize_nomination_owner_or_admin(nomination)
+      render json: { errors: ["Forbidden"] }, status: :forbidden
+    else
+      render json: nomination
+    end
   end
 
   def update
     nomination = Nomination.find(params[:id])
-    authorize_nomination_owner_or_admin(nomination)
-    if nomination.update(update_params)
+    if authorize_nomination_owner_or_admin(nomination)
+      render json: { errors: ["Forbidden"] }, status: :forbidden
+    elsif nomination.update(update_params)
       render json: nomination.team
     else
       render_object_errors(nomination)

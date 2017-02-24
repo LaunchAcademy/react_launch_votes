@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe Api::V1::CurrentController, type: :controller do
   let(:json_parsed_response)  { JSON.parse(response.body) }
 
-  describe "GET #show" do
+  describe "GET #index" do
     let(:user) { create :user }
 
     it "returns a serialized user" do
