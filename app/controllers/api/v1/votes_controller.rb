@@ -3,7 +3,9 @@ class Api::V1::VotesController < Api::ApiController
   def create
     vote = Vote.new(vote_params)
     vote.user = current_user
-    if vote.save
+    if !current_user.teams.include?(vote.nomination.team)
+      render json: { errors: ["Forbidden"] }, status: :forbidden
+    elsif vote.save
       render json: vote.nomination
     else
       render_object_errors(vote)
@@ -12,7 +14,9 @@ class Api::V1::VotesController < Api::ApiController
 
   def destroy
     vote = Vote.find(params[:id])
-    if vote.destroy
+    if current_user != vote.user
+      render json: { errors: ["Forbidden"] }, status: :forbidden
+    elsif vote.destroy
       render json: vote.nomination
     else
       render_object_errors(vote)
