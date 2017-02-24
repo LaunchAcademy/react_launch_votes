@@ -10,12 +10,22 @@ RSpec.describe Api::V1::VotesController, type: :controller do
     let(:non_team_user) { create :user }
     let!(:membership) { create :membership, team: nomination.team, user: user }
 
-    it "it returns the vote's nomination as JSON" do
-      session[:user_id] = user.id
-      post :create, params: { vote: { nomination_id: nomination.id } }
+    describe "it returns the vote's nomination as JSON" do
+      it "as a team member user" do
+        session[:user_id] = user.id
+        post :create, params: { vote: { nomination_id: nomination.id } }
 
-      expect(response.status).to eq 200
-      expect(json_parsed_response.keys).to eq ["id", "body", "nominator_id", "nominee_id", "nominee", "voter_ids"]
+        expect(response.status).to eq 200
+        expect(json_parsed_response.keys).to eq ["id", "body", "nominator_id", "nominee_id", "nominee", "voter_ids"]
+      end
+
+      it "as an admin user" do
+        session[:user_id] = admin.id
+        post :create, params: { vote: { nomination_id: nomination.id } }
+
+        expect(response.status).to eq 200
+        expect(json_parsed_response.keys).to eq ["id", "body", "nominator_id", "nominee_id", "nominee", "voter_ids"]
+      end
     end
 
     it "successfully votes for a nomination" do

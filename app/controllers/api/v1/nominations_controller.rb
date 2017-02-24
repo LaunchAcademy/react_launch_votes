@@ -1,7 +1,7 @@
 class Api::V1::NominationsController < Api::ApiController
 
   def authorize_nomination_owner_or_admin(nomination)
-    !current_user.admin? && current_user != nomination.nominator
+    current_user != nomination.nominator && !current_user.admin?
   end
 
   def create

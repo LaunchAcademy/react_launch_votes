@@ -3,7 +3,7 @@ class Api::V1::VotesController < Api::ApiController
   def create
     vote = Vote.new(vote_params)
     vote.user = current_user
-    if !current_user.teams.include?(vote.nomination.team)
+    if !current_user.teams.include?(vote.nomination.team) && !current_user.admin?
       render json: { errors: ["Forbidden"] }, status: :forbidden
     elsif vote.save
       render json: vote.nomination
