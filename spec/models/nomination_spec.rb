@@ -46,9 +46,18 @@ describe Nomination, type: :model do
       expect(nomination.valid?).to be(true)
     end
 
-
     it "rejects non-team nominees" do
       nomination.nominee = non_team_user
+      expect(nomination.valid?).to be(false)
+    end
+  end
+
+  describe "validates nominator and nominee are not the same" do
+    let(:user) { create(:user) }
+    let(:nomination) { create(:nomination, nominator: user) }
+
+    it "rejects self-nominations" do
+      nomination.nominee = user
       expect(nomination.valid?).to be(false)
     end
   end
