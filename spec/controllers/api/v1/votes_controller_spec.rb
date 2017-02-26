@@ -44,6 +44,7 @@ RSpec.describe Api::V1::VotesController, type: :controller do
 
   describe "DELETE #destroy" do
     let(:vote) { create :vote }
+    let(:user) { create :user }
 
     it "it returns the deleted vote's nomination as JSON" do
       session[:user_id] = vote.user.id
@@ -56,6 +57,14 @@ RSpec.describe Api::V1::VotesController, type: :controller do
 
     it "successfully deletes a vote" do
       expect { delete :destroy, params: {id: vote.id} }.to change{ Vote.count }.by 1
+    end
+
+    it "returns an error if the vote does not belong to the current user" do
+      session[:user_id] = user.id
+      delete :destroy, params: { id: vote.id }
+
+      expect(response.status).to eq 403
+      expect(json_parsed_response.keys).to eq ["errors"]
     end
   end
 end

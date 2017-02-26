@@ -13,5 +13,11 @@ RSpec.describe Api::V1::CurrentController, type: :controller do
       expect(json_parsed_response.keys).to eq ["admin?", "id", "name", "teams"]
       expect(json_parsed_response["name"]).to eq user.name
     end
+
+    it "returns errors if the user is not signed in" do
+      get :index, params: { user: {} }
+
+      expect(json_parsed_response.keys).to eq ["errors"]
+    end
   end
 end
