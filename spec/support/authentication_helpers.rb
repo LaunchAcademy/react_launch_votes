@@ -1,13 +1,22 @@
 module AuthenticationHelpers
-  def link_launch_pass(uid = "9999", email = "makewayforlaf@silasuniversity.edu", teams = [FactoryGirl.create(:team)])
-    serialized_teams = teams.map { |t| { "id" => t.launch_pass_id, "name" => t.name } }
+  def link_launch_pass(options =
+    {
+      uid: "9999",
+      email: "makewayforlaf@silasuniversity.edu",
+      first_name: "S.",
+      last_name: "LaFontaine",
+      teams: [FactoryGirl.create(:team)]
+    })
+    options[:serialized_teams] = options[:teams].map { |t| { "id" => t.launch_pass_id, "name" => t.name } }
     OmniAuth.config.mock_auth[:launch_pass] = OmniAuth::AuthHash.new({
       provider: "launch_pass",
-      uid: uid,
+      uid: options[:uid],
       info: {
-        email: email,
-        teams: serialized_teams,
-        product_offerings: serialized_teams
+        first_name: options[:first_name],
+        last_name: options[:last_name],
+        email: options[:email],
+        teams: options[:serialized_teams],
+        product_offerings: []
       }
     })
     visit auth_path(:launch_pass)

@@ -64,21 +64,4 @@ describe User, type: :model do
       expect(user.persisted?).to be(true)
     end
   end
-
-  describe "#update_from_launch_pass" do
-    launch_pass_auth_hash =
-    { "info" =>
-      { "email" => "lhollis@silasuniversity.edu",
-        "id" => 4242
-      }
-    }
-    let(:user) { create(:user) }
-
-    it "updates the correct attributes" do
-      expect(user.update_from_launch_pass(launch_pass_auth_hash)).to be_a(User)
-      expect(user.email).to eq("lhollis@silasuniversity.edu")
-      expect(user.launch_pass_id).to eq(4242)
-      expect(user.persisted?).to be(true)
-    end
-  end
 end

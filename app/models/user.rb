@@ -18,6 +18,15 @@ class User < ApplicationRecord
     teams.where(name: "Admins").any?
   end
 
+  def normalize_github_auth_hash(auth_hash)
+    unless auth_hash["info"]["name"].present?
+      assign_attributes(
+        name: auth_hash["info"]["nickname"]
+      )
+    end
+    self
+  end
+
   def to_param
     handle
   end
@@ -27,13 +36,7 @@ class User < ApplicationRecord
       handle: auth_hash["info"]["nickname"],
       image_url: auth_hash["info"]["image"],
       name: auth_hash["info"]["name"])
-    self
-  end
-
-  def update_from_launch_pass(auth_hash)
-    assign_attributes(
-      email: auth_hash["info"]["email"],
-      launch_pass_id: auth_hash["info"]["id"])
+    normalize_github_auth_hash(auth_hash)
     self
   end
 
@@ -43,6 +46,7 @@ class User < ApplicationRecord
       handle: auth_hash["info"]["nickname"],
       image_url: auth_hash["info"]["image"],
       name: auth_hash["info"]["name"])
+    .normalize_github_auth_hash(auth_hash)
   end
 
 end

@@ -37,7 +37,7 @@ class LaunchPassDigester
   def payload_product_offerings
     payload_product_offerings = Hash.new
     product_offerings.each do |product_offering|
-      if product_offering["location"]
+      if product_offering["location"].present?
         product_offering_name = "#{product_offering['location'].titleize} #{product_offering['name']}"
         payload_product_offerings[product_offering["id"]] = product_offering_name
       else
@@ -61,10 +61,11 @@ class LaunchPassDigester
   end
 
   def update_user!
+    user_name = "#{info['first_name']} #{info['last_name']}"
     if user.launch_pass_id.nil?
-      user.update(email: info["email"], launch_pass_id: launch_pass_id)
+      user.update(email: info["email"], launch_pass_id: launch_pass_id, name: user_name)
     else
-      user.update(email: info["email"])
+      user.update(email: info["email"], name: user_name)
     end
   end
 
