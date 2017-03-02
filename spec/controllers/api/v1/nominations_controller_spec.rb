@@ -95,7 +95,7 @@ RSpec.describe Api::V1::NominationsController, type: :controller do
   describe "PATCH #update" do
     let(:nomination) { create :nomination }
     let(:user) { create :user }
-    let(:admin) { create :admin_user }
+    let!(:admin) { create :admin_user }
 
     describe "it returns the nomination team as JSON (with nested updated nomination)" do
       it "as the nominator user" do
