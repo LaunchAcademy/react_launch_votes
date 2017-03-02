@@ -6,7 +6,8 @@ module AuthenticationHelpers
       uid: uid,
       info: {
         email: email,
-        teams: serialized_teams
+        teams: serialized_teams,
+        product_offerings: serialized_teams
       }
     })
     visit auth_path(:launch_pass)
