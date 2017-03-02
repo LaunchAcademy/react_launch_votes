@@ -10,7 +10,7 @@ FactoryGirl.define do
 
     trait :admin do
       after(:build) do |user|
-        admin_team = Team.admins
+        admin_team = Team.find_or_create_by(name: "Admins")
         create(:membership, team: admin_team, user: user)
       end
     end

@@ -37,19 +37,19 @@ class LaunchPassDigester
     payload_teams
   end
 
-  def update_user_product_offerings!
-    updated_product_offerings.each do |product_offering|
-      membership = Membership.find_or_initialize_by(team: product_offering, user: user)
-      membership.save unless membership.persisted?
-    end
-  end
-
   def update_user!
     user_name = "#{info['first_name']} #{info['last_name']}"
     if user.launch_pass_id.nil?
       user.update(email: info["email"], launch_pass_id: launch_pass_id, name: user_name)
     else
       user.update(email: info["email"], name: user_name)
+    end
+  end
+
+  def update_user_product_offerings!
+    updated_product_offerings.each do |product_offering|
+      membership = Membership.find_or_initialize_by(team: product_offering, user: user)
+      membership.save unless membership.persisted?
     end
   end
 

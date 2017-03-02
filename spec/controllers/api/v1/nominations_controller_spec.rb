@@ -56,7 +56,7 @@ RSpec.describe Api::V1::NominationsController, type: :controller do
   describe "GET #show" do
     let(:nomination) { create :nomination }
     let(:user) { create :user }
-    let(:admin) { create :admin_user }
+    let!(:admin) { create :admin_user }
 
     describe "it returns the nomination as JSON" do
       it "as the nominator user" do

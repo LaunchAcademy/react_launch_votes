@@ -2,6 +2,9 @@ require "rails_helper"
 
 RSpec.describe Api::V1::TeamsController, type: :controller do
   let(:json_parsed_response)  { JSON.parse(response.body) }
+  before(:all) do
+    Team.find_or_create_by(name: "Admins")
+  end
 
   describe "GET #show" do
     let(:team) { create :team, name: "DGHDA Squad" }

@@ -13,6 +13,6 @@ class Team < ApplicationRecord
   end
 
   def self.admins
-    find_or_create_by(name: "Admins")
+    where(name: "Admins").first
   end
 end
