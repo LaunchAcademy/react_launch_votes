@@ -1,5 +1,5 @@
 .award-ribbon {
-  background-image: url("<%= image_path('pink_ribbon.png') %>");
+  background-image: image-url("pink_ribbon.png");
   background-repeat: no-repeat;
   background-size: 100%;
   height: 9rem;
@@ -14,7 +14,7 @@
 }
 
 .ribbon {
-  background-image: url("<%= image_path('pink_ribbon.png') %>");
+  background-image: image-url("pink_ribbon.png");
   background-repeat: no-repeat;
   background-size: 100%;
   cursor: pointer;

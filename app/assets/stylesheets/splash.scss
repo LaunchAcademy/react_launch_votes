@@ -1,0 +1,16 @@
+@media (min-width: 960px) {
+  .splash-page {
+      background-image: image-url("class.png");
+      background-repeat: no-repeat;
+      background-size: 100%;
+      padding: 12rem;
+
+    .inner-splash {
+      background: rgba(235,34,123,0.5);
+      h1, h2 {
+        color: #f8f8f9;
+      }
+    }
+  }
+}
+
