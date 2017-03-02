@@ -7,9 +7,8 @@ describe Team, type: :model do
   it { should have_many(:nominations) }
   it { should have_many(:members) }
 
-  it { should validate_presence_of(:name) }
   it { should validate_numericality_of(:vote_threshold).is_greater_than(0).only_integer }
-  it { should validate_uniqueness_of(:launch_pass_id) }
+  it { should validate_uniqueness_of(:name) }
 
   describe "#users" do
     let(:user) { create(:user) }

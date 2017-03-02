@@ -7,7 +7,6 @@ module AuthenticationHelpers
       last_name: "LaFontaine",
       teams: [FactoryGirl.create(:team)]
     })
-    options[:serialized_teams] = options[:teams].map { |t| { "id" => t.launch_pass_id, "name" => t.name } }
     OmniAuth.config.mock_auth[:launch_pass] = OmniAuth::AuthHash.new({
       provider: "launch_pass",
       uid: options[:uid],
@@ -15,7 +14,7 @@ module AuthenticationHelpers
         first_name: options[:first_name],
         last_name: options[:last_name],
         email: options[:email],
-        teams: options[:serialized_teams],
+        teams: options[:teams],
         product_offerings: []
       }
     })

@@ -18,38 +18,22 @@ class LaunchPassDigester
 
   attr_reader :info, :launch_pass_id, :product_offerings, :teams, :user
 
-  def new_product_offering_ids
-    payload_product_offering_ids - user_team_ids
-  end
-
-  def new_team_ids
-    payload_team_ids - user_team_ids
-  end
-
-  def payload_product_offering_ids
-    payload_product_offerings.keys
-  end
-
-  def payload_team_ids
-    payload_teams.keys
-  end
-
   def payload_product_offerings
-    payload_product_offerings = Hash.new
+    payload_product_offerings = Array.new
     product_offerings.each do |product_offering|
       if product_offering["location"].present?
         product_offering_name = "#{product_offering['location'].titleize} #{product_offering['name']}"
-        payload_product_offerings[product_offering["id"]] = product_offering_name
+        payload_product_offerings << product_offering_name
       else
-        payload_product_offerings[product_offering["id"]] = product_offering["name"]
+        payload_product_offerings << product_offering["name"]
       end
     end
     payload_product_offerings
   end
 
   def payload_teams
-    payload_teams = Hash.new
-    teams.each { |team| payload_teams[team["id"]] = team["name"] }
+    payload_teams = Array.new
+    teams.each { |team| payload_teams << team["name"] }
     payload_teams
   end
 
@@ -78,10 +62,9 @@ class LaunchPassDigester
 
   def updated_product_offerings
     updated_product_offerings = Array.new
-    new_product_offering_ids.each do |id|
-      product_offering = Team.find_or_initialize_by(launch_pass_id: id)
-      product_offering.name = payload_product_offerings[id]
-      product_offering.save
+    payload_product_offerings.each do |name|
+      product_offering = Team.find_or_initialize_by(name: name)
+      product_offering.save unless product_offering.persisted?
       updated_product_offerings << product_offering
     end
     updated_product_offerings
@@ -89,17 +72,11 @@ class LaunchPassDigester
 
   def updated_teams
     updated_teams = Array.new
-    new_team_ids.each do |id|
-      team = Team.find_or_initialize_by(launch_pass_id: id)
-      team.name = payload_teams[id]
-      team.save
+    payload_teams.each do |name|
+      team = Team.find_or_initialize_by(name: name)
+      team.save unless team.persisted?
       updated_teams << team
     end
     updated_teams
   end
-
-  def user_team_ids
-    user.teams.map(&:id)
-  end
-
 end

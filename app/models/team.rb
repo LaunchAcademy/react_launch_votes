@@ -3,9 +3,8 @@ class Team < ApplicationRecord
   has_many :nominations
   has_many :members, through: :memberships, source: :user
 
-  validates_presence_of :name
   validates_numericality_of :vote_threshold, greater_than: 0, only_integer: true
-  validates_uniqueness_of :launch_pass_id
+  validates_uniqueness_of :name
 
   scope :active, -> { where(active: true).order(:name) }
 
@@ -14,9 +13,6 @@ class Team < ApplicationRecord
   end
 
   def self.admins
-    find_or_create_by(
-      name: "Admins",
-      launch_pass_id: 1
-    )
+    find_or_create_by(name: "Admins")
   end
 end
