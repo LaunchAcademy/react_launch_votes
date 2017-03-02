@@ -36,7 +36,14 @@ class LaunchPassDigester
 
   def payload_product_offerings
     payload_product_offerings = Hash.new
-    product_offerings.each { |product_offering| payload_product_offerings[product_offering["id"]] = product_offering["name"] }
+    product_offerings.each do |product_offering|
+      if product_offering["location"]
+        product_offering_name = "#{product_offering['location'].titleize} #{product_offering['name']}"
+        payload_product_offerings[product_offering["id"]] = product_offering_name
+      else
+        payload_product_offerings[product_offering["id"]] = product_offering["name"]
+      end
+    end
     payload_product_offerings
   end
 
