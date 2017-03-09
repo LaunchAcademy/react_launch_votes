@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by(handle: params[:id])
-    @awards = Nomination.unscoped.where(nominee: @user).previous_weeks.by_votes(1)
+    @awards = Nomination.unscoped.where(nominee: @user).where("votes_count >= ?", 1).previous_weeks.order(votes_count: :desc).limit(10).reverse
   end
 
   def update
