@@ -103,7 +103,7 @@ RSpec.describe Api::V1::NominationsController, type: :controller do
         patch :update, params: { id: nomination.id, team_id: nomination.team.id, nomination: { body: "Least Something" } }
 
         expect(response.status).to eq 200
-        expect(json_parsed_response.keys).to eq ["id", "name", "nominations", "users"]
+        expect(json_parsed_response.keys).to eq ["id", "name", "nomination_placeholder", "nominations", "users"]
         expect(json_parsed_response["id"]).to eq nomination.team.id
         expect(json_parsed_response["nominations"].map{ |n| n["id"] }).to include(nomination.id)
       end
@@ -113,7 +113,7 @@ RSpec.describe Api::V1::NominationsController, type: :controller do
         patch :update, params: { id: nomination.id, team_id: nomination.team.id, nomination: { body: "Least Something" } }
 
         expect(response.status).to eq 200
-        expect(json_parsed_response.keys).to eq ["id", "name", "nominations", "users"]
+        expect(json_parsed_response.keys).to eq ["id", "name", "nomination_placeholder", "nominations", "users"]
         expect(json_parsed_response["id"]).to eq nomination.team.id
         expect(json_parsed_response["nominations"].map{ |n| n["id"] }).to include(nomination.id)
       end

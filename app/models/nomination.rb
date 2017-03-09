@@ -1,4 +1,15 @@
 class Nomination < ApplicationRecord
+  PLACEHOLDERS = [
+    "Most Glorious Beard",
+    "Best Flow",
+    "Most Help Requests",
+    "Fastest Typer",
+    "Best Spectacles",
+    "Best Accent",
+    "Most Likely To `git push origin master -f`",
+    "Breakable Toy Already Funded on Kickstarter"
+  ]
+
   default_scope { current_week.by_nominee.newest_first }
 
   belongs_to :nominator, class_name: "User"

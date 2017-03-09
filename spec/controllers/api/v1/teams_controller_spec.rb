@@ -19,7 +19,7 @@ RSpec.describe Api::V1::TeamsController, type: :controller do
         session[:user_id] = farah.id
         get :show, params: { id: team.id }
 
-        expect(json_parsed_response.keys).to eq ["id", "name", "nominations", "users"]
+        expect(json_parsed_response.keys).to eq ["id", "name", "nomination_placeholder", "nominations", "users"]
         expect(json_parsed_response["users"].map{|user| user["name"]}).to eq ["Amanda Brotzman", "Dirk Gently", "Farah Black", "Todd Brotzman"]
         expect(json_parsed_response["nominations"].map{|nomination| nomination["body"]}).to eq ["Best Jacket", "Best Hair"]
       end
@@ -30,7 +30,7 @@ RSpec.describe Api::V1::TeamsController, type: :controller do
         session[:user_id] = admin.id
         get :show, params: { id: team.id }
 
-        expect(json_parsed_response.keys).to eq ["id", "name", "nominations", "users"]
+        expect(json_parsed_response.keys).to eq ["id", "name", "nomination_placeholder", "nominations", "users"]
         expect(json_parsed_response["users"].map{|user| user["name"]}).to eq ["Amanda Brotzman", "Dirk Gently", "Farah Black", "Todd Brotzman", "Bart Curlish"]
         expect(json_parsed_response["nominations"].map{|nomination| nomination["body"]}).to eq ["Best Jacket", "Best Hair"]
       end

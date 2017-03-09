@@ -26,7 +26,7 @@ let NewNominationForm = ({ currentUser, error, handleSubmit, pristine, submittin
           <option></option>
           {options}
         </Field>
-        <Field name="body" component="input" type="text" placeholder="Most help requests" />
+        <Field name="body" component="input" type="text" placeholder={team.nomination_placeholder} />
         {error}
         <div className="text-center">
           <button className="button secondary" disabled={pristine || submitting} type="submit">
