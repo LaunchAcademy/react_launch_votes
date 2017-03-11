@@ -1,14 +1,15 @@
--if @user == current_user && current_user.teams.count > 1
-  .row
-    .small-11.medium-7.small-centered.columns
-      .callout.primary.text-center
-        %h3 Default Team:
-        =form_for current_user do |f|
-          -if current_user.admin?
-            =f.select :default_team_id, content_tag(:option, nil, value: nil) + options_from_collection_for_select(Team.active, :id, :name, current_user.default_team_id)
-          -else
-            =f.select :default_team_id, content_tag(:option, nil, value: nil) + options_from_collection_for_select(current_user.teams, :id, :name, current_user.default_team_id)
-          =f.submit "Save", class: "button secondary"
+-if @user == current_user
+  -if current_user.teams.count > 1 || current_user.admin?
+    .row
+      .small-11.medium-7.small-centered.columns
+        .callout.primary.text-center
+          %h3 Default Team:
+          =form_for current_user do |f|
+            -if current_user.admin?
+              =f.select :default_team_id, content_tag(:option, nil, value: nil) + options_from_collection_for_select(Team.active, :id, :name, current_user.default_team_id)
+            -else
+              =f.select :default_team_id, content_tag(:option, nil, value: nil) + options_from_collection_for_select(current_user.teams, :id, :name, current_user.default_team_id)
+            =f.submit "Save", class: "button secondary"
 .row
   .small-11.medium-10.large-9.small-centered.columns
     %h1.text-center Past Awards for #{@user.name}
