@@ -41,6 +41,12 @@ class NominationsContainer extends Component {
     if (currentUser["admin?"]) {
       awardsLink = <a className="button large" href={`/teams/${this.props.teamData.team.id}/awards`}>See Awards</a>
     }
+    let header;
+    if (this.props.teamData.team.id) {
+      header = <h2>Nominations for {this.props.teamData.team.name} <RefreshButton refreshTeam={refreshTeam} teamId={this.props.teamData.team.id}/></h2>
+    } else {
+      header = <h2>Loading&hellip; <i className="fa fa-refresh fa-spin pink" /></h2>
+    }
     let refreshTeam = (teamId) => {
       this.props.getTeam(teamId);
     }
@@ -50,7 +56,7 @@ class NominationsContainer extends Component {
           <div className="small-11 medium-7 small-centered columns">
             <NewNominationForm currentUser={this.props.currentUser.currentUser} team={this.props.teamData.team} onSubmit={this.postNomination} />
             <div className="text-center">
-              <h2>Nominations for {this.props.teamData.team.name} <RefreshButton refreshTeam={refreshTeam} teamId={this.props.teamData.team.id}/></h2>
+              {header}
               {awardsLink}
             </div>
           </div>
