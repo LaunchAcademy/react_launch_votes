@@ -39,7 +39,7 @@ class NominationsContainer extends Component {
     }
     let awardsLink;
     if (currentUser["admin?"]) {
-      awardsLink = <a className="button large" href={`/teams/${this.props.teamData.team.id}/awards`}>See Awards</a>
+      awardsLink = <a className="button large" href={`/teams/${this.props.params.teamId}/awards`}>See Awards</a>
     }
     let header;
     if (this.props.teamData.team.id) {
