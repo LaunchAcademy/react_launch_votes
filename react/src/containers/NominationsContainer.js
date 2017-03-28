@@ -14,6 +14,7 @@ import RefreshButton from '../components/RefreshButton';
 class NominationsContainer extends Component {
   constructor(props) {
     super(props);
+    this.refreshTeam = this.refreshTeam.bind(this);
   }
 
   componentWillMount() {
@@ -26,6 +27,9 @@ class NominationsContainer extends Component {
     return dispatch(postNomination(fields));
   }
 
+  refreshTeam(teamId) {
+    this.props.getTeam(teamId);
+  }
 
   render() {
     let nominations;
@@ -43,12 +47,9 @@ class NominationsContainer extends Component {
     }
     let header;
     if (this.props.teamData.team.id) {
-      header = <h2>Nominations for {this.props.teamData.team.name} <RefreshButton refreshTeam={refreshTeam} teamId={this.props.teamData.team.id}/></h2>
+      header = <h2>Nominations for {this.props.teamData.team.name} <RefreshButton refreshTeam={this.refreshTeam} teamId={this.props.teamData.team.id}/></h2>
     } else {
       header = <h2>Loading&hellip; <i className="fa fa-refresh fa-spin pink" /></h2>
-    }
-    let refreshTeam = (teamId) => {
-      this.props.getTeam(teamId);
     }
     return(
       <div>
