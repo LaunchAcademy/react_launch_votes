@@ -17,6 +17,7 @@
 .byebug_history
 
 .env
+latest.dump
 /app/assets/javascripts/bundle.js
 /db/seeds.rb
 /coverage
