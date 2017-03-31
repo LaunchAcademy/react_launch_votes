@@ -3,6 +3,6 @@ class AwardsController < ApplicationController
 
   def index
     @team = Team.find(params[:team_id])
-    @awards = Nomination.unscoped.where(team: @team).current_week.by_votes(@team.vote_threshold)
+    @awards = Nomination.unscoped.where(archived: false, team: @team).current_week.by_votes(@team.vote_threshold)
   end
 end

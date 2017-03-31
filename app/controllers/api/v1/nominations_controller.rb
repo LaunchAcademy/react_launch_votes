@@ -15,7 +15,7 @@ class Api::V1::NominationsController < Api::ApiController
   def destroy
     nomination = Nomination.find(params[:id])
     if authorize_nomination_owner_or_admin(nomination)
-      if nomination.destroy
+      if nomination.update(archived: true)
         render json: nomination
       else
         render_object_errors(nomination)

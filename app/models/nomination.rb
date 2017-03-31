@@ -10,13 +10,14 @@ class Nomination < ApplicationRecord
     "Breakable Toy Already Funded on Kickstarter"
   ]
 
-  default_scope { current_week.by_nominee.newest_first }
+  default_scope { where(archived: false).current_week.by_nominee.newest_first }
 
   belongs_to :nominator, class_name: "User"
   belongs_to :nominee, class_name: "User"
   belongs_to :team
   has_many :votes, dependent: :destroy
 
+  validates_inclusion_of :archived, in: [true, false]
   validates_presence_of :body
   validates :body, length: { maximum: 160 }
   validate :nominator_not_nominee
