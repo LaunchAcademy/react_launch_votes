@@ -18,6 +18,10 @@ class User < ApplicationRecord
     teams.where(name: "Admins").any?
   end
 
+  def current_team
+    teams.count == 1 ? teams.first : default_team
+  end
+
   def normalize_github_auth_hash(auth_hash)
     unless auth_hash["info"]["name"].present?
       assign_attributes(
