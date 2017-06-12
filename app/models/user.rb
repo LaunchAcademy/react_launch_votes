@@ -34,9 +34,7 @@ class User < ApplicationRecord
   def update_from_github(auth_hash)
     assign_attributes(
       handle: auth_hash["info"]["nickname"],
-      image_url: auth_hash["info"]["image"],
-      name: auth_hash["info"]["name"])
-    normalize_github_auth_hash(auth_hash)
+      image_url: auth_hash["info"]["image"])
     self
   end
 

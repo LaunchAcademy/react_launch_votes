@@ -60,7 +60,6 @@ describe User, type: :model do
       expect(user.update_from_github(github_auth_hash)).to be_a(User)
       expect(user.handle).to eq("Laura2theLetter")
       expect(user.image_url).to eq("http://imgur.com")
-      expect(user.name).to eq("Laura Hollis")
       expect(user.persisted?).to be(true)
     end
   end
