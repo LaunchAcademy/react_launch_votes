@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170331213306) do
+ActiveRecord::Schema.define(version: 20170627143355) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,9 +54,10 @@ ActiveRecord::Schema.define(version: 20170331213306) do
     t.integer  "launch_pass_id"
     t.string   "name"
     t.integer  "sign_in_count",   default: 0
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.integer  "default_team_id"
+    t.boolean  "active",          default: true
     t.index ["github_id"], name: "index_users_on_github_id", unique: true, using: :btree
     t.index ["handle"], name: "index_users_on_handle", unique: true, using: :btree
   end

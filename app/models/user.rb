@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   EMAIL_REGEXP = /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/
 
-  default_scope { order(:name) }
+  default_scope { where(active: true).order(:name) }
 
   belongs_to :default_team, class_name: "Team", required: false
   has_many :nominations, foreign_key: :nominee_id
@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_many :teams, through: :memberships
   has_many :votes
 
+  validates_inclusion_of :active, in: [true, false]
   validates_format_of :email, with: EMAIL_REGEXP, allow_blank: true
   validates_format_of :image_url, with: URI::regexp(["http", "https"])
   validates_presence_of :name
