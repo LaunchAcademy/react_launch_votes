@@ -1,5 +1,5 @@
 class AwardsController < ApplicationController
-  before_action :authenticate_admin!
+  before_action :authenticate_admin_or_presenter!
 
   def index
     @team = Team.find(params[:team_id])

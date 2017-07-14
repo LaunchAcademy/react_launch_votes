@@ -10,6 +10,7 @@ class User < ApplicationRecord
   has_many :votes
 
   validates_inclusion_of :active, in: [true, false]
+  validates_inclusion_of :presenter, in: [true, false]
   validates_format_of :email, with: EMAIL_REGEXP, allow_blank: true
   validates_format_of :image_url, with: URI::regexp(["http", "https"])
   validates_presence_of :name
