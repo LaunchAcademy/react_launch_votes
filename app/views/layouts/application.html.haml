@@ -45,7 +45,7 @@
             -else
               %ul.vertical.medium-horizontal.menu
                 %li
-                  = link_to auth_path(:github), class: "padding-top-one-and-a-half" do
+                  = link_to "/auth/github", class: "padding-top-one-and-a-half", method: :post do
                     %i.fa.fa-github
                     Sign In with GitHub
     - flash.each do |name, msg|

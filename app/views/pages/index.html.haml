@@ -1,7 +1,7 @@
 -if user_signed_in?
   .row
     .small-11.medium-7.small-centered.columns
-      =link_to auth_path(:launch_pass), class: "button expanded large" do
+      =link_to "/auth/launch_pass", class: "button expanded large", method: :post do
         %i.fa.fa-rocket
         Link Your Account To LaunchPass
 -else
@@ -13,7 +13,7 @@
           %h2.text-center For Weekly Nominations
           .row
             .small-11.medium-7.small-centered.columns
-              =link_to auth_path(:github), class: "button expanded large" do
+              =link_to "/auth/github", class: "button expanded large", method: :post do
                 %i.fa.fa-github
                 Sign In with GitHub
       .callout.margin-top-one

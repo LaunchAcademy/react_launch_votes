@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root "pages#index"
 
-  get "auth/:provider/callback", to: "authentication_flows#create"
+  get "/auth/:provider/callback", to: "authentication_flows#create"
   delete "sign-out", to: "sessions#destroy"
   get "team-selector", to: "team_selector#index"
 
@@ -24,7 +24,9 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :auth, only: :show
+  # for omniauth link helper 
+  # resources :auth, only: :show
+
   resources :sessions, only: :new
   resources :teams, only: [] do
     resources :awards, only: :index

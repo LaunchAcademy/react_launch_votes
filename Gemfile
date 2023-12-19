@@ -15,6 +15,7 @@ gem "jquery-rails"
 gem 'omniauth-github', '~> 2.0.0'
 gem "omniauth-launch-pass",
   github: 'launchacademy/omniauth-launch-pass'
+gem 'omniauth-rails_csrf_protection'
 gem "pg", "~> 1.0"
 gem "puma", "~> 3.0"
 gem "rails", "~> 5.0.1"
