@@ -12,7 +12,7 @@ gem "font-awesome-rails"
 gem "haml"
 gem "jbuilder", "~> 2.5"
 gem "jquery-rails"
-gem "omniauth-github", "~> 1.4"
+gem 'omniauth-github', '~> 2.0.0'
 gem "omniauth-launch-pass",
   github: 'launchacademy/omniauth-launch-pass'
 gem "pg", "~> 1.0"
